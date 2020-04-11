@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>动态规划</title>
+<title>差分数组</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13077,165 +13077,72 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="KMP&#31639;&#27861;">KMP&#31639;&#27861;<a class="anchor-link" href="#KMP&#31639;&#27861;">&#182;</a></h1><h2 id="KMP&#31639;&#27861;&#26377;&#20004;&#20010;&#20851;&#38190;&#30340;&#27493;&#39588;:">KMP&#31639;&#27861;&#26377;&#20004;&#20010;&#20851;&#38190;&#30340;&#27493;&#39588;:<a class="anchor-link" href="#KMP&#31639;&#27861;&#26377;&#20004;&#20010;&#20851;&#38190;&#30340;&#27493;&#39588;:">&#182;</a></h2><p>(1) Next 数组的生成<br>
-(2) Next 数组的应用</p>
-<h2 id="Next&#25968;&#32452;&#30340;&#21547;&#20041;:">Next&#25968;&#32452;&#30340;&#21547;&#20041;:<a class="anchor-link" href="#Next&#25968;&#32452;&#30340;&#21547;&#20041;:">&#182;</a></h2><p>Next函数的主要目的是为了挖掘匹配子串内部的相关性以及无关性</p>
-<p>如串<code>abcabcd</code>,该串前面的6个字符串是<code>abc</code>重复而成.</p>
-<p>如果文本<code>abcabc*</code>与串<code>abcabcd</code>已经匹配了前6个,
-此时若<code>*</code>是<code>d</code>那么文本可以与字符串匹配,若<code>*</code>不是<code>d</code>,直观来看可以判断是不是<code>a</code>,也就是串的第四个字符,
-能够这样直观进行的原因是我们知道<code>abcabcd</code>前面6个存在重复,且<code>abcabc*</code>已经匹配了6或者3个.</p>
-<p>数组的含义:</p>
-<ul>
-<li><code>-1</code>表示没有匹配,可以退出了</li>
-<li><code>i = 0-n</code>表示去<code>i</code>看看,如果<code>i</code>不行可以去<code>next[i]</code>看看</li>
+<h1 id="&#21069;&#32512;&#21644;&amp;&#24046;&#20998;">&#21069;&#32512;&#21644;&amp;&#24046;&#20998;<a class="anchor-link" href="#&#21069;&#32512;&#21644;&amp;&#24046;&#20998;">&#182;</a></h1><ul>
+<li>前缀和 -&gt; 区间和查询</li>
+<li>差分 -&gt; 区间增减操作</li>
 </ul>
+<p>对于原始数列</p>
 
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">getNext</span><span class="p">(</span><span class="n">pattern</span><span class="p">):</span>
-    <span class="n">j</span><span class="p">,</span><span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span>
-    <span class="n">pattern_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span> 
-    <span class="nb">next</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">pattern_len</span>
-    <span class="nb">next</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-    <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">pattern_len</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">pattern</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="n">pattern</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
-            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="nb">next</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span>
-        <span class="k">else</span><span class="p">:</span> 
-            <span class="n">k</span> <span class="o">=</span> <span class="nb">next</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
-    <span class="k">return</span> <span class="nb">next</span>
-</pre></div>
+<pre><code>d1 d2 d3 d4 d5 ... dn</code></pre>
+<p>有差分数列,其中<code>fn = dn - d(n-1), f1 = d1</code></p>
 
-    </div>
-</div>
-</div>
+<pre><code>f1 f2 f3 f4 f5 ... fn</code></pre>
+<p>有前缀和列,其中 <code>Sn = d1+...+dn</code></p>
 
-<div class="output_wrapper">
-<div class="output">
+<pre><code>S1 S2 S3 S4 S5 ... Sn</code></pre>
+<p>加和视图</p>
 
+<pre><code># 前缀和与原始序列的关系
+S1 S2 S3 S4 S5 ... Sn
+----------------------
+d1 d1 d1 d1 d1 ... d1
+   d2 d2 d2 d2 ... d2
+      d3 d3 d3 ... d3
+         d4 d4 ... d4
+            d5 ... d5
+                ..
+                 .
+                   dn
 
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[10]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[-1, 0, 0, 0, 1, 2, 3]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Next&#25968;&#32452;&#30340;&#24212;&#29992;">Next&#25968;&#32452;&#30340;&#24212;&#29992;<a class="anchor-link" href="#Next&#25968;&#32452;&#30340;&#24212;&#29992;">&#182;</a></h2><p>虽然是while循环,但是while循环并不是每一次都用来前进的,也可能是装轨</p>
-<p>但是总的前进方向是正确的</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">kmp</span><span class="p">(</span><span class="n">string</span><span class="p">,</span><span class="n">pattern</span><span class="p">):</span>
-    <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span>
-    <span class="nb">next</span> <span class="o">=</span> <span class="n">getNext</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
-    <span class="k">while</span>  <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>  <span class="ow">and</span>  <span class="n">j</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span> <span class="p">:</span>
-        <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">string</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">pattern</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
-            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">j</span> <span class="o">=</span> <span class="nb">next</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">i</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
-
-<span class="n">kmp</span><span class="p">(</span><span class="s2">&quot;abcdabceabc&quot;</span><span class="p">,</span><span class="s2">&quot;abce&quot;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[20]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>4</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>两个步骤的相似于不同:</p>
+# 差分数组与原始列的关系
+d1 d2 d3 d4 d5 ... dn
+----------------------
+f1 f1 f1 f1 f1 ... f1
+   f2 f2 f2 f2 ... f2
+      f3 f3 f3 ... f3
+         f4 f4 ... f4
+            f5 ... f5
+                ..
+                 .
+                   fn</code></pre>
+<h2 id="&#21069;&#32512;&#21644;&#26597;&#35810;&#21306;&#38388;&#27714;&#21644;">&#21069;&#32512;&#21644;&#26597;&#35810;&#21306;&#38388;&#27714;&#21644;<a class="anchor-link" href="#&#21069;&#32512;&#21644;&#26597;&#35810;&#21306;&#38388;&#27714;&#21644;">&#182;</a></h2><p>sum:L-&gt;R = Sum[R] - Sum[L-1]</p>
+<h2 id="&#24046;&#20998;&#25968;&#32452;&#23545;&#21306;&#38388;&#25805;&#20316;">&#24046;&#20998;&#25968;&#32452;&#23545;&#21306;&#38388;&#25805;&#20316;<a class="anchor-link" href="#&#24046;&#20998;&#25968;&#32452;&#23545;&#21306;&#38388;&#25805;&#20316;">&#182;</a></h2><p>对区间L,R内的数字进行统一加D的操作</p>
 <ul>
-<li>双指针</li>
-<li>while循环只代表一个指针的单调递增</li>
-<li>循环内的副指针能够通过指示进行回溯</li>
-<li>使用 <code>-1</code> 表示没有双指针共同前进,及全无关情况</li>
+<li>d[L]   += D</li>
+<li>d[R+1] -= D</li>
 </ul>
-<p>这道题目给我的其实应该是一种匹配模式</p>
-<ul>
-<li>使用外挂信息记录跳转</li>
-<li>while循环并非递增</li>
-</ul>
+<h2 id="&#21069;&#32512;&#24207;&#21015;&#21644;&#24046;&#20998;&#25968;&#32452;&#30340;&#20851;&#31995;">&#21069;&#32512;&#24207;&#21015;&#21644;&#24046;&#20998;&#25968;&#32452;&#30340;&#20851;&#31995;<a class="anchor-link" href="#&#21069;&#32512;&#24207;&#21015;&#21644;&#24046;&#20998;&#25968;&#32452;&#30340;&#20851;&#31995;">&#182;</a></h2><p>$S_n = \sum_{i=0}^{i=n} (n-i+1)\times f_i$</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">cairo</span>
+<div class=" highlight hl-ipython3"><pre><span></span>    <span class="k">try</span><span class="p">:</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdin</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">line</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">l</span><span class="p">,</span><span class="n">r</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
 
-<span class="k">with</span> <span class="n">cairo</span><span class="o">.</span><span class="n">SVGSurface</span><span class="p">(</span><span class="s2">&quot;example.svg&quot;</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span> <span class="k">as</span> <span class="n">surface</span><span class="p">:</span>
-    <span class="n">context</span> <span class="o">=</span> <span class="n">cairo</span><span class="o">.</span><span class="n">Context</span><span class="p">(</span><span class="n">surface</span><span class="p">)</span>
-    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.9</span>
-    <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">x3</span><span class="p">,</span> <span class="n">y3</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.5</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">set_line_width</span><span class="p">(</span><span class="mf">0.04</span><span class="p">)</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">curve_to</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">x3</span><span class="p">,</span> <span class="n">y3</span><span class="p">)</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">stroke</span><span class="p">()</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">set_source_rgba</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">)</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">set_line_width</span><span class="p">(</span><span class="mf">0.02</span><span class="p">)</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">line_to</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">line_to</span><span class="p">(</span><span class="n">x3</span><span class="p">,</span> <span class="n">y3</span><span class="p">)</span>
-    <span class="n">context</span><span class="o">.</span><span class="n">stroke</span><span class="p">()</span>
+        <span class="n">l_count</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">3</span> <span class="p">)</span>
+        <span class="n">r_count</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">/</span><span class="mi">3</span> <span class="p">)</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="n">r_count</span><span class="o">-</span><span class="n">l_count</span> 
+        <span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
 </pre></div>
 
     </div>
@@ -13245,34 +13152,22 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%%</span><span class="k">markdown</span>
-![ex](example.svg)
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">line</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdin</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">line</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+    <span class="n">l</span><span class="p">,</span><span class="n">r</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+
+    <span class="n">l_count</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">3</span> <span class="p">)</span>
+    <span class="n">r_count</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">/</span><span class="mi">3</span> <span class="p">)</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">r_count</span><span class="o">-</span><span class="n">l_count</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<p><img src="example.svg" alt="ex"></p>
-
-</div>
-
-</div>
-
 </div>
 </div>
 
