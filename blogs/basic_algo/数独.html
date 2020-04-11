@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>index</title>
+<title>数独</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13077,7 +13077,26 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="https://raw.githubusercontent.com/TheTinkerJ/TheTinkerJ.github.io/master/_material/_index/head.png" alt="网站首页图片"></p>
+<h1 id="&#25968;&#29420;">&#25968;&#29420;<a class="anchor-link" href="#&#25968;&#29420;">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="2020&#24180;4&#26376;11&#26085;-23:08:12(&#26410;&#23436;&#25104;)">2020&#24180;4&#26376;11&#26085; 23:08:12(&#26410;&#23436;&#25104;)<a class="anchor-link" href="#2020&#24180;4&#26376;11&#26085;-23:08:12(&#26410;&#23436;&#25104;)">&#182;</a></h2><ul>
+<li>[x] 数独 </li>
+<li>[ ] 质数分解</li>
+<li>[ ] 编辑距离</li>
+<li>[ ] 滑动窗口</li>
+<li>[ ] 一元一次方程组</li>
+<li>[ ] 最长无重复子串</li>
+<li>[ ] 最长回文子串</li>
+</ul>
+<blockquote><p>大概两小时,独立完成数独求解算法<br>
+现在速度确实是慢
+星期六, 2020年4月11日 23:08:12</p>
+</blockquote>
 
 </div>
 </div>
@@ -13085,38 +13104,212 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="&#29483;&#21733;'s-&#36187;&#21338;&#31354;&#38388;">&#29483;&#21733;'s &#36187;&#21338;&#31354;&#38388;<a class="anchor-link" href="#&#29483;&#21733;'s-&#36187;&#21338;&#31354;&#38388;">&#182;</a></h2>
+<h2 id="&#25968;&#29420;">&#25968;&#29420;<a class="anchor-link" href="#&#25968;&#29420;">&#182;</a></h2><p><code>9*9</code>数独</p>
+<ul>
+<li>判断当前输入是否有效</li>
+<li>求解数独</li>
+</ul>
+<p>算法思路说明:</p>
+<p>(1) 使用三个量来记录数独情况:</p>
+<ul>
+<li>rows 标记每一行中当前数字出现情况<code>rowss[0][2]=1</code>表示第一行存在一个3 (2+1索引从0开始)</li>
+<li>cols 标记每一列中当前数字出现情况<code>cols[0][5]=1</code>表示第一列存在一个6</li>
+<li>cells 标记每一个正方形中当前数字出现情况<code>cells[0][8]</code>表示第一个三角中存在一个9</li>
+</ul>
+<p>(2) 对数独进行一次遍历可以获取数独的初始情况</p>
+<p>(3) 简单将<code>rows</code>,<code>cols</code>,<code>cells</code>按照对应数字相加,表示数字的优先级<br>
+优先级越高越早计算,对算法越有利</p>
+<p>(4) 按照(3)中优先顺序处理,使用回溯法递归求解</p>
+<p>递归中的一个关键步骤是当前可能值得求解,每次往数独中填数时都会改变统计量 rows,cols,cells</p>
+<p>每次处理固定位置row,col时,都可以根据:</p>
+<ul>
+<li><code>rows[row]</code> row 行出现过哪些数字</li>
+<li><code>cols[col]</code> col 行出现过哪些数字</li>
+<li><code>cells[map2cell(row,col)]</code> (row,col)cell单元出现过哪些数字</li>
+</ul>
+<p>推算出row,col上允许出现得数字(排除上述出现得数字即可)</p>
+<blockquote><p>这里使用的是全局变量,也是引用变量,每一次递归调用的变动都会对全局造成影响,需要手动恢复.</p>
+</blockquote>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[117]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">site_info</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;url&#39;</span><span class="p">:</span><span class="s1">&#39;https://thetinkerj.github.io/&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;material_url&#39;</span><span class="p">:</span><span class="s1">&#39;https://raw.githubusercontent.com/TheTinkerJ/TheTinkerJ.github.io/master/&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;repo&#39;</span><span class="p">:</span><span class="s1">&#39;TheTinkerJ.github.io&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;auther&#39;</span><span class="p">:</span><span class="s1">&#39;猫哥&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;email&#39;</span><span class="p">:</span><span class="s1">&#39;thetinkerj@outlook.com&#39;</span><span class="p">,</span>
-<span class="p">}</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># def check_sudoku(sudoku):</span>
+<span class="n">sudoku</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">[</span><span class="s2">&quot;5&quot;</span><span class="p">,</span><span class="s2">&quot;3&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;7&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">],</span>
+  <span class="p">[</span><span class="s2">&quot;6&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;9&quot;</span><span class="p">,</span><span class="s2">&quot;5&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">],</span>
+  <span class="p">[</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;9&quot;</span><span class="p">,</span><span class="s2">&quot;8&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;6&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">],</span>
+  <span class="p">[</span><span class="s2">&quot;8&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;6&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;3&quot;</span><span class="p">],</span>
+  <span class="p">[</span><span class="s2">&quot;4&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;8&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;3&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">],</span>
+  <span class="p">[</span><span class="s2">&quot;7&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;2&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;6&quot;</span><span class="p">],</span>
+  <span class="p">[</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;6&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;2&quot;</span><span class="p">,</span><span class="s2">&quot;8&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">],</span>
+  <span class="p">[</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;4&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;9&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;5&quot;</span><span class="p">],</span>
+  <span class="p">[</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;8&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;7&quot;</span><span class="p">,</span><span class="s2">&quot;9&quot;</span><span class="p">]</span>
+<span class="p">]</span>
+
+<span class="n">cols</span>  <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">9</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">)]</span>
+<span class="n">rows</span>  <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">9</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">)]</span>
+<span class="n">cells</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">9</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">)]</span>
+
+<span class="c1">#      0-2 3-5 6-8</span>
+<span class="c1"># 0-2 | 0   1   2</span>
+<span class="c1"># 3-5 | 3   4   5 </span>
+<span class="c1"># 6-8 | 6   7   8</span>
+<span class="k">def</span> <span class="nf">map2cell</span><span class="p">(</span><span class="n">row</span><span class="p">,</span><span class="n">col</span><span class="p">):</span>
+    <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">row</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>  
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">col</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span> <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">elif</span> <span class="mi">3</span> <span class="o">&lt;=</span> <span class="n">col</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">:</span> <span class="k">return</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="mi">6</span> <span class="o">&lt;=</span> <span class="n">col</span> <span class="o">&lt;=</span> <span class="mi">8</span><span class="p">:</span> <span class="k">return</span> <span class="mi">2</span>
+    <span class="k">elif</span> <span class="mi">3</span> <span class="o">&lt;=</span> <span class="n">row</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">col</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span> <span class="k">return</span> <span class="mi">3</span>
+        <span class="k">elif</span> <span class="mi">3</span> <span class="o">&lt;=</span> <span class="n">col</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">:</span> <span class="k">return</span> <span class="mi">4</span>
+        <span class="k">elif</span> <span class="mi">6</span> <span class="o">&lt;=</span> <span class="n">col</span> <span class="o">&lt;=</span> <span class="mi">8</span><span class="p">:</span> <span class="k">return</span> <span class="mi">5</span>
+    <span class="k">elif</span> <span class="mi">6</span> <span class="o">&lt;=</span> <span class="n">row</span> <span class="o">&lt;=</span> <span class="mi">8</span><span class="p">:</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">col</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span> <span class="k">return</span> <span class="mi">6</span>
+        <span class="k">elif</span> <span class="mi">3</span> <span class="o">&lt;=</span> <span class="n">col</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">:</span> <span class="k">return</span> <span class="mi">7</span>
+        <span class="k">elif</span> <span class="mi">6</span> <span class="o">&lt;=</span> <span class="n">col</span> <span class="o">&lt;=</span> <span class="mi">8</span><span class="p">:</span> <span class="k">return</span> <span class="mi">8</span>
+
+<span class="c1"># 生成统计结果</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+        <span class="n">cur</span> <span class="o">=</span> <span class="n">sudoku</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">cur</span> <span class="o">!=</span> <span class="s2">&quot;.&quot;</span><span class="p">:</span>
+            <span class="n">cur_idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cur</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+            <span class="n">cols</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="n">cur_idx</span><span class="p">]</span> <span class="o">+=</span><span class="mi">1</span>
+            <span class="n">rows</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">cur_idx</span><span class="p">]</span> <span class="o">+=</span><span class="mi">1</span> 
+            <span class="n">cells</span><span class="p">[</span><span class="n">map2cell</span><span class="p">(</span><span class="n">row</span><span class="p">,</span><span class="n">col</span><span class="p">)][</span><span class="n">cur_idx</span><span class="p">]</span> <span class="o">+=</span><span class="mi">1</span>
+
+<span class="c1"># 判断是否有效 </span>
+<span class="n">has_bug</span> <span class="o">=</span> <span class="kc">True</span> <span class="ow">in</span> <span class="p">[</span><span class="n">cell</span> <span class="o">&gt;=</span><span class="mi">2</span>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span> <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">cells</span><span class="p">[:][</span><span class="n">i</span><span class="p">]]</span> <span class="ow">or</span> \
+    <span class="kc">True</span> <span class="ow">in</span> <span class="p">[</span> <span class="n">col</span> <span class="o">&gt;=</span><span class="mi">2</span>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cols</span><span class="p">[:][</span><span class="n">i</span><span class="p">]</span> <span class="p">]</span> <span class="ow">or</span> \
+    <span class="kc">True</span> <span class="ow">in</span> <span class="p">[</span> <span class="n">row</span> <span class="o">&gt;=</span><span class="mi">2</span>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">[:][</span><span class="n">i</span><span class="p">]</span> <span class="p">]</span> 
+
+<span class="c1"># 使用热值来生成一个计算顺序</span>
+<span class="k">def</span> <span class="nf">heat_compute</span><span class="p">(</span><span class="n">row</span><span class="p">,</span><span class="n">col</span><span class="p">):</span>
+    <span class="n">heat</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">rows</span><span class="p">[</span><span class="n">row</span><span class="p">])</span><span class="o">+</span><span class="nb">sum</span><span class="p">(</span><span class="n">cols</span><span class="p">[</span><span class="n">col</span><span class="p">])</span><span class="o">+</span><span class="nb">sum</span><span class="p">(</span><span class="n">cells</span><span class="p">[</span><span class="n">map2cell</span><span class="p">(</span><span class="n">row</span><span class="p">,</span><span class="n">col</span><span class="p">)])</span>
+    <span class="k">return</span> <span class="n">heat</span>
+
+<span class="c1"># 对于热值高的点优先计算可以减少时间复杂度</span>
+<span class="n">point_count</span> <span class="o">=</span> <span class="p">[(</span><span class="n">heat_compute</span><span class="p">(</span><span class="n">row</span><span class="p">,</span><span class="n">col</span><span class="p">),</span><span class="n">row</span><span class="p">,</span><span class="n">col</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span> <span class="k">if</span> <span class="n">sudoku</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;.&#39;</span> <span class="p">]</span> 
+<span class="n">point4solve</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">point_count</span><span class="p">,</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">sudoku_solver</span><span class="p">(</span><span class="n">idx</span><span class="p">):</span>   
+    <span class="k">if</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">idx</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">point4solve</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="n">_</span><span class="p">,</span><span class="n">row</span><span class="p">,</span><span class="n">col</span> <span class="o">=</span> <span class="n">point4solve</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+    <span class="n">possible_val</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">rows</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">cols</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">cells</span><span class="p">[</span><span class="n">map2cell</span><span class="p">(</span><span class="n">row</span><span class="p">,</span><span class="n">col</span><span class="p">)][</span><span class="n">v</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">possible_val</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>    
+    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">possible_val</span><span class="p">:</span>
+        <span class="n">sudoku</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">cols</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="n">val</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">rows</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">val</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">cells</span><span class="p">[</span><span class="n">map2cell</span><span class="p">(</span><span class="n">row</span><span class="p">,</span><span class="n">col</span><span class="p">)][</span><span class="n">val</span><span class="p">]</span> <span class="o">+=</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="n">sudoku_solver</span><span class="p">(</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span> <span class="c1"># 递归 </span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="n">cols</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="n">val</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="n">rows</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">val</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="n">cells</span><span class="p">[</span><span class="n">map2cell</span><span class="p">(</span><span class="n">row</span><span class="p">,</span><span class="n">col</span><span class="p">)][</span><span class="n">val</span><span class="p">]</span> <span class="o">-=</span><span class="mi">1</span>
+        <span class="n">sudoku</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span>
+    <span class="k">return</span> <span class="kc">False</span>
+
+<span class="n">sudoku_solver</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[117]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>True</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[102]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">welcome</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;欢迎来到-猫哥-的Site-ฅ&#39;ω&#39;ฅ!&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;flag : goodgoodstudy daydayup!!!&quot;</span><span class="p">)</span>
-<span class="n">welcome</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sudoku</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[102]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[[&#39;5&#39;, &#39;3&#39;, &#39;4&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;, &#39;1&#39;, &#39;2&#39;],
+ [&#39;6&#39;, &#39;7&#39;, &#39;2&#39;, &#39;1&#39;, &#39;9&#39;, &#39;5&#39;, &#39;3&#39;, &#39;4&#39;, &#39;8&#39;],
+ [&#39;1&#39;, &#39;9&#39;, &#39;8&#39;, &#39;3&#39;, &#39;4&#39;, &#39;2&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;],
+ [&#39;8&#39;, &#39;5&#39;, &#39;9&#39;, &#39;7&#39;, &#39;6&#39;, &#39;1&#39;, &#39;4&#39;, &#39;2&#39;, &#39;3&#39;],
+ [&#39;4&#39;, &#39;2&#39;, &#39;6&#39;, &#39;8&#39;, &#39;5&#39;, &#39;3&#39;, &#39;7&#39;, &#39;9&#39;, &#39;1&#39;],
+ [&#39;7&#39;, &#39;1&#39;, &#39;3&#39;, &#39;9&#39;, &#39;2&#39;, &#39;4&#39;, &#39;8&#39;, &#39;5&#39;, &#39;6&#39;],
+ [&#39;9&#39;, &#39;6&#39;, &#39;1&#39;, &#39;5&#39;, &#39;3&#39;, &#39;7&#39;, &#39;2&#39;, &#39;8&#39;, &#39;4&#39;],
+ [&#39;2&#39;, &#39;8&#39;, &#39;7&#39;, &#39;4&#39;, &#39;1&#39;, &#39;9&#39;, &#39;6&#39;, &#39;3&#39;, &#39;5&#39;],
+ [&#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;2&#39;, &#39;8&#39;, &#39;6&#39;, &#39;1&#39;, &#39;7&#39;, &#39;9&#39;]]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="&#23454;&#39564;&#20013;&#21457;&#29616;&#30340;&#19968;&#20010;&#38382;&#39064;">&#23454;&#39564;&#20013;&#21457;&#29616;&#30340;&#19968;&#20010;&#38382;&#39064;<a class="anchor-link" href="#&#23454;&#39564;&#20013;&#21457;&#29616;&#30340;&#19968;&#20010;&#38382;&#39064;">&#182;</a></h3><p>如下例,这结果好像 or 和 and 反过来了一样,有点显然违背常识(卡了我很久)</p>
+<p>todo 目前没有解答</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[115]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;y</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span><span class="s2">&quot; or&quot;</span><span class="p">,</span><span class="s2">&quot;y</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">x</span> <span class="ow">or</span> <span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span><span class="s2">&quot;and&quot;</span><span class="p">,</span><span class="s2">&quot;y</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">x</span> <span class="ow">and</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13133,8 +13326,10 @@ div#notebook {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>欢迎来到-猫哥-的Site-ฅ&#39;ω&#39;ฅ!
-flag : goodgoodstudy daydayup!!!
+<pre>x	 [1, 0, 1]
+y	 [1, 1, 1]
+x  or y	 [1, 0, 1]
+x and y	 [1, 1, 1]
 </pre>
 </div>
 </div>
@@ -13146,196 +13341,104 @@ flag : goodgoodstudy daydayup!!!
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="&#30446;&#24405;-Contents">&#30446;&#24405; Contents<a class="anchor-link" href="#&#30446;&#24405;-Contents">&#182;</a></h2>
+<h2 id="LeetCode-37.-&#35299;&#25968;&#29420;"><a href="https://leetcode-cn.com/problems/sudoku-solver/">LeetCode 37. &#35299;&#25968;&#29420;</a><a class="anchor-link" href="#LeetCode-37.-&#35299;&#25968;&#29420;">&#182;</a></h2><p>AC 66% 50%</p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[107]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="k">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
-<span class="kn">import</span> <span class="nn">os</span>
-
-<span class="n">indent_html</span><span class="p">,</span><span class="n">indent_offset</span><span class="o">=</span> <span class="s2">&quot;&amp;emsp;&quot;</span><span class="p">,</span><span class="mi">3</span>        
-<span class="n">contents</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;_posts&quot;</span><span class="p">]</span>
-<span class="n">root_path</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">show_dir</span><span class="p">(</span><span class="n">dir_name</span><span class="p">):</span>
-    <span class="n">left</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span><span class="o">-</span> <span class="n">indent_offset</span>
-    <span class="n">dir_indent</span> <span class="o">=</span> <span class="p">[</span><span class="n">indent_html</span><span class="p">]</span><span class="o">*</span><span class="n">left</span>
-    <span class="n">dir_indent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dir_name</span><span class="p">)</span>
-    <span class="n">dir_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_indent</span><span class="p">)</span> <span class="o">+</span><span class="s2">&quot;/&quot;</span>
-    <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">dir_str</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     
-<span class="k">def</span> <span class="nf">show_note</span><span class="p">(</span><span class="n">page_name</span><span class="p">):</span>
-    <span class="n">left</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span> <span class="o">-</span><span class="n">indent_offset</span>
-    <span class="n">page_indent</span> <span class="o">=</span> <span class="p">[</span><span class="n">indent_html</span><span class="p">]</span><span class="o">*</span><span class="n">left</span>
-    <span class="n">page_indent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">page_name</span><span class="p">)</span>
-    <span class="n">page_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">page_indent</span><span class="p">)</span>
-    <span class="n">page_url_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;blogs&quot;</span><span class="p">]</span>
-    <span class="n">page_url_list</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">contents</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-    <span class="n">page_url_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">page_name</span><span class="o">+</span><span class="s2">&quot;.html&quot;</span><span class="p">)</span>
-    <span class="n">page_url</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">page_url_list</span><span class="p">)</span>
-    <span class="n">page_url_str</span> <span class="o">=</span> <span class="s1">&#39;&lt;a href=&quot;</span><span class="si">%s</span><span class="s1">&quot; style=&quot;text-decoration:none&quot;&gt;</span><span class="si">%s</span><span class="s1">&lt;/a&gt;&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">page_url</span><span class="p">,</span><span class="n">page_str</span><span class="p">)</span>
-    <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">page_url_str</span><span class="p">))</span>
-
-<span class="k">def</span> <span class="nf">search_Dir</span><span class="p">(</span><span class="n">dir_path</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">dir_path</span><span class="p">):</span>
-        <span class="n">contents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-        <span class="n">cur_path</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">cur_path</span><span class="p">)</span> <span class="ow">and</span> <span class="n">cur_path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.ipynb&#39;</span><span class="p">):</span>
-            <span class="n">filename</span><span class="p">,</span><span class="n">suffix</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-            <span class="n">show_note</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">cur_path</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">cur_path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.ipynb_checkpoints&quot;</span><span class="p">):</span>
-            <span class="n">show_dir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-            <span class="n">search_Dir</span><span class="p">(</span><span class="n">cur_path</span><span class="p">)</span>
-        <span class="n">contents</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">map2cell</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">row</span><span class="p">,</span><span class="n">col</span><span class="p">):</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">row</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>  
+            <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">col</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span> <span class="k">return</span> <span class="mi">0</span>
+            <span class="k">elif</span> <span class="mi">3</span> <span class="o">&lt;=</span> <span class="n">col</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">:</span> <span class="k">return</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="mi">6</span> <span class="o">&lt;=</span> <span class="n">col</span> <span class="o">&lt;=</span> <span class="mi">8</span><span class="p">:</span> <span class="k">return</span> <span class="mi">2</span>
+        <span class="k">elif</span> <span class="mi">3</span> <span class="o">&lt;=</span> <span class="n">row</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">col</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span> <span class="k">return</span> <span class="mi">3</span>
+            <span class="k">elif</span> <span class="mi">3</span> <span class="o">&lt;=</span> <span class="n">col</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">:</span> <span class="k">return</span> <span class="mi">4</span>
+            <span class="k">elif</span> <span class="mi">6</span> <span class="o">&lt;=</span> <span class="n">col</span> <span class="o">&lt;=</span> <span class="mi">8</span><span class="p">:</span> <span class="k">return</span> <span class="mi">5</span>
+        <span class="k">elif</span> <span class="mi">6</span> <span class="o">&lt;=</span> <span class="n">row</span> <span class="o">&lt;=</span> <span class="mi">8</span><span class="p">:</span>
+            <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">col</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span> <span class="k">return</span> <span class="mi">6</span>
+            <span class="k">elif</span> <span class="mi">3</span> <span class="o">&lt;=</span> <span class="n">col</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">:</span> <span class="k">return</span> <span class="mi">7</span>
+            <span class="k">elif</span> <span class="mi">6</span> <span class="o">&lt;=</span> <span class="n">col</span> <span class="o">&lt;=</span> <span class="mi">8</span><span class="p">:</span> <span class="k">return</span> <span class="mi">8</span>
     
-<span class="n">search_Dir</span><span class="p">(</span><span class="n">root_path</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-basic_algo/
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<a href="blogs/basic_algo/dp.html" style="text-decoration:none">&emsp;dp</a>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-&emsp;tree/
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<a href="blogs/basic_algo/差分数组.html" style="text-decoration:none">&emsp;差分数组</a>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<a href="blogs/basic_algo/数独.html" style="text-decoration:none">&emsp;数独</a>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-machine_learning/
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-programming_language/
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-&emsp;java/
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-&emsp;python/
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-&emsp;scala/
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
-<span class="n">localtime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">asctime</span><span class="p">(</span> <span class="n">time</span><span class="o">.</span><span class="n">localtime</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span> <span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;更新时间 :&quot;</span><span class="p">,</span> <span class="n">localtime</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">heat_compute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">row</span><span class="p">,</span><span class="n">col</span><span class="p">):</span>
+        <span class="n">heat</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">[</span><span class="n">row</span><span class="p">])</span> <span class="o">+</span> \
+            <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="n">col</span><span class="p">])</span> <span class="o">+</span> \
+            <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cells</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">map2cell</span><span class="p">(</span><span class="n">row</span><span class="p">,</span><span class="n">col</span><span class="p">)])</span>
+        <span class="k">return</span> <span class="n">heat</span>
+
+    <span class="k">def</span> <span class="nf">sudoku_solver</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">idx</span><span class="p">):</span>   
+        <span class="k">if</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">idx</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">point4solve</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="n">_</span><span class="p">,</span><span class="n">row</span><span class="p">,</span><span class="n">col</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">point4solve</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="n">possible_val</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> \
+                <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="n">v</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> \
+                <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">cells</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">map2cell</span><span class="p">(</span><span class="n">row</span><span class="p">,</span><span class="n">col</span><span class="p">)][</span><span class="n">v</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">possible_val</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">possible_val</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">possible_val</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">board</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="n">val</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">val</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cells</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">map2cell</span><span class="p">(</span><span class="n">row</span><span class="p">,</span><span class="n">col</span><span class="p">)][</span><span class="n">val</span><span class="p">]</span> <span class="o">+=</span><span class="mi">1</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sudoku_solver</span><span class="p">(</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span> <span class="c1"># 递归 </span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="n">val</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">val</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cells</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">map2cell</span><span class="p">(</span><span class="n">row</span><span class="p">,</span><span class="n">col</span><span class="p">)][</span><span class="n">val</span><span class="p">]</span> <span class="o">-=</span><span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">board</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    
+    <span class="k">def</span> <span class="nf">solveSudoku</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">board</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :type board: List[List[str]]</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cols</span>  <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">9</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rows</span>  <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">9</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cells</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="mi">9</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">board</span> <span class="o">=</span> <span class="n">board</span>
+        
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+                <span class="n">cur</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">board</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">cur</span> <span class="o">!=</span> <span class="s2">&quot;.&quot;</span><span class="p">:</span>
+                    <span class="n">cur_idx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cur</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="n">cur_idx</span><span class="p">]</span> <span class="o">+=</span><span class="mi">1</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">cur_idx</span><span class="p">]</span> <span class="o">+=</span><span class="mi">1</span> 
+                    <span class="bp">self</span><span class="o">.</span><span class="n">cells</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">map2cell</span><span class="p">(</span><span class="n">row</span><span class="p">,</span><span class="n">col</span><span class="p">)][</span><span class="n">cur_idx</span><span class="p">]</span> <span class="o">+=</span><span class="mi">1</span>
+        <span class="n">point_count</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">heat_compute</span><span class="p">(</span><span class="n">row</span><span class="p">,</span><span class="n">col</span><span class="p">),</span><span class="n">row</span><span class="p">,</span><span class="n">col</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">board</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">col</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;.&#39;</span> <span class="p">]</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">point4solve</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">point_count</span><span class="p">,</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sudoku_solver</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+
+<span class="n">sudoku</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">[</span><span class="s2">&quot;5&quot;</span><span class="p">,</span><span class="s2">&quot;3&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;7&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">],</span>
+  <span class="p">[</span><span class="s2">&quot;6&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;9&quot;</span><span class="p">,</span><span class="s2">&quot;5&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">],</span>
+  <span class="p">[</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;9&quot;</span><span class="p">,</span><span class="s2">&quot;8&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;6&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">],</span>
+  <span class="p">[</span><span class="s2">&quot;8&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;6&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;3&quot;</span><span class="p">],</span>
+  <span class="p">[</span><span class="s2">&quot;4&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;8&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;3&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">],</span>
+  <span class="p">[</span><span class="s2">&quot;7&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;2&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;6&quot;</span><span class="p">],</span>
+  <span class="p">[</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;6&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;2&quot;</span><span class="p">,</span><span class="s2">&quot;8&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">],</span>
+  <span class="p">[</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;4&quot;</span><span class="p">,</span><span class="s2">&quot;1&quot;</span><span class="p">,</span><span class="s2">&quot;9&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;5&quot;</span><span class="p">],</span>
+  <span class="p">[</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;8&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;7&quot;</span><span class="p">,</span><span class="s2">&quot;9&quot;</span><span class="p">]</span>
+<span class="p">]</span>
+
+<span class="n">so</span> <span class="o">=</span> <span class="n">Solution</span><span class="p">()</span>
+<span class="n">so</span><span class="o">.</span><span class="n">solveSudoku</span><span class="p">(</span><span class="n">sudoku</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">sudoku</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13352,7 +13455,15 @@ programming_language/
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>更新时间 : Sat Apr 11 23:35:41 2020
+<pre>[&#39;5&#39;, &#39;3&#39;, &#39;4&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;, &#39;1&#39;, &#39;2&#39;]
+[&#39;6&#39;, &#39;7&#39;, &#39;2&#39;, &#39;1&#39;, &#39;9&#39;, &#39;5&#39;, &#39;3&#39;, &#39;4&#39;, &#39;8&#39;]
+[&#39;1&#39;, &#39;9&#39;, &#39;8&#39;, &#39;3&#39;, &#39;4&#39;, &#39;2&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;]
+[&#39;8&#39;, &#39;5&#39;, &#39;9&#39;, &#39;7&#39;, &#39;6&#39;, &#39;1&#39;, &#39;4&#39;, &#39;2&#39;, &#39;3&#39;]
+[&#39;4&#39;, &#39;2&#39;, &#39;6&#39;, &#39;8&#39;, &#39;5&#39;, &#39;3&#39;, &#39;7&#39;, &#39;9&#39;, &#39;1&#39;]
+[&#39;7&#39;, &#39;1&#39;, &#39;3&#39;, &#39;9&#39;, &#39;2&#39;, &#39;4&#39;, &#39;8&#39;, &#39;5&#39;, &#39;6&#39;]
+[&#39;9&#39;, &#39;6&#39;, &#39;1&#39;, &#39;5&#39;, &#39;3&#39;, &#39;7&#39;, &#39;2&#39;, &#39;8&#39;, &#39;4&#39;]
+[&#39;2&#39;, &#39;8&#39;, &#39;7&#39;, &#39;4&#39;, &#39;1&#39;, &#39;9&#39;, &#39;6&#39;, &#39;3&#39;, &#39;5&#39;]
+[&#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;2&#39;, &#39;8&#39;, &#39;6&#39;, &#39;1&#39;, &#39;7&#39;, &#39;9&#39;]
 </pre>
 </div>
 </div>
