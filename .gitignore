@@ -1,1 +1,3 @@
-.ipynb_checkpoints/*
+.ipynb_checkpoints/*.ipynb
+.ipynb_checkpoints/index-checkpoint.ipynb
+.ipynb_checkpoints/jpnblog-checkpoint.py
