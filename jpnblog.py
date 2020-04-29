@@ -40,6 +40,7 @@ for jpy in file_require:
     os.system(cmd)
 
 os.system("jupyter nbconvert --to html --execute .\index.ipynb --output index.html")
+
 # print("exit")
 # sys.exit()
 #主页刷新

@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>dp</title>
+<title>2020年4月25日_03-sql语言</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13077,17 +13077,203 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="KMP&#31639;&#27861;">KMP&#31639;&#27861;<a class="anchor-link" href="#KMP&#31639;&#27861;">&#182;</a></h1><h2 id="KMP&#31639;&#27861;&#26377;&#20004;&#20010;&#20851;&#38190;&#30340;&#27493;&#39588;:">KMP&#31639;&#27861;&#26377;&#20004;&#20010;&#20851;&#38190;&#30340;&#27493;&#39588;:<a class="anchor-link" href="#KMP&#31639;&#27861;&#26377;&#20004;&#20010;&#20851;&#38190;&#30340;&#27493;&#39588;:">&#182;</a></h2><p>(1) Next 数组的生成<br>
-(2) Next 数组的应用</p>
-<h2 id="Next&#25968;&#32452;&#30340;&#21547;&#20041;:">Next&#25968;&#32452;&#30340;&#21547;&#20041;:<a class="anchor-link" href="#Next&#25968;&#32452;&#30340;&#21547;&#20041;:">&#182;</a></h2><p>Next函数的主要目的是为了挖掘匹配子串内部的相关性以及无关性</p>
-<p>如串<code>abcabcd</code>,该串前面的6个字符串是<code>abc</code>重复而成.</p>
-<p>如果文本<code>abcabc*</code>与串<code>abcabcd</code>已经匹配了前6个,
-此时若<code>*</code>是<code>d</code>那么文本可以与字符串匹配,若<code>*</code>不是<code>d</code>,直观来看可以判断是不是<code>a</code>,也就是串的第四个字符,
-能够这样直观进行的原因是我们知道<code>abcabcd</code>前面6个存在重复,且<code>abcabc*</code>已经匹配了6或者3个.</p>
-<p>数组的含义:</p>
+<h1 id="SQL&#35821;&#35328;&#30340;&#29702;&#35770;&#22522;&#30784;">SQL&#35821;&#35328;&#30340;&#29702;&#35770;&#22522;&#30784;<a class="anchor-link" href="#SQL&#35821;&#35328;&#30340;&#29702;&#35770;&#22522;&#30784;">&#182;</a></h1><h2 id="DBMS&#30340;&#29992;&#25143;&#25968;&#25454;&#25509;&#21475;">DBMS&#30340;&#29992;&#25143;&#25968;&#25454;&#25509;&#21475;<a class="anchor-link" href="#DBMS&#30340;&#29992;&#25143;&#25968;&#25454;&#25509;&#21475;">&#182;</a></h2><ul>
+<li>Query Languanges<ul>
+<li>形式化查询语言</li>
+<li>表格化查询语言</li>
+<li>图形化查询语言 sparql</li>
+<li>类自然查询语言 </li>
+</ul>
+</li>
+<li>GUI</li>
+<li>APIs</li>
+<li>Class Library</li>
+</ul>
+<h2 id="SQL&#35821;&#35328;&#30340;&#20998;&#31867;">SQL&#35821;&#35328;&#30340;&#20998;&#31867;<a class="anchor-link" href="#SQL&#35821;&#35328;&#30340;&#20998;&#31867;">&#182;</a></h2><ul>
+<li>DDL 数据定义语言 - 定义,删除,修改schema</li>
+<li>QL 数据查询语言  - 查找数据</li>
+<li>DML 数据操作语言 - 增删改</li>
+<li>DCL 数据控制语言 - 控制访问权限</li>
+</ul>
+<h2 id="&#22522;&#26412;&#27010;&#24565;">&#22522;&#26412;&#27010;&#24565;<a class="anchor-link" href="#&#22522;&#26412;&#27010;&#24565;">&#182;</a></h2><ul>
+<li>base table</li>
+<li>view</li>
+<li>Data type supported</li>
+<li>NULL (除去Boolean之后,引入NULL变成三值逻辑)</li>
+<li>UNIQUE (是否允许重复值)</li>
+<li>DEFAULT (默认值)</li>
+<li>PRIMARY KEY 主键</li>
+<li>FOREIGN KEY 外键</li>
+<li>CHECK 可以为表定义完整性约束</li>
+</ul>
+<h2 id="&#34920;&#26679;&#20363;:">&#34920;&#26679;&#20363;:<a class="anchor-link" href="#&#34920;&#26679;&#20363;:">&#182;</a></h2><p>水手信息 S1</p>
+<table>
+<thead><tr>
+<th>sid</th>
+<th>sname</th>
+<th>rating</th>
+<th>age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>22</td>
+<td>dustin</td>
+<td>7</td>
+<td>45.0</td>
+</tr>
+<tr>
+<td>31</td>
+<td>lubber</td>
+<td>8</td>
+<td>55.5</td>
+</tr>
+<tr>
+<td>58</td>
+<td>rusty</td>
+<td>10</td>
+<td>35.0</td>
+</tr>
+</tbody>
+</table>
+<p>水手信息 S2</p>
+<table>
+<thead><tr>
+<th>sid</th>
+<th>sname</th>
+<th>rating</th>
+<th>age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>28</td>
+<td>yuppy</td>
+<td>9</td>
+<td>35.0</td>
+</tr>
+<tr>
+<td>31</td>
+<td>lubber</td>
+<td>8</td>
+<td>55.5</td>
+</tr>
+<tr>
+<td>44</td>
+<td>guppy</td>
+<td>5</td>
+<td>35.0</td>
+</tr>
+<tr>
+<td>58</td>
+<td>rusty</td>
+<td>10</td>
+<td>35.0</td>
+</tr>
+</tbody>
+</table>
+<p>船信息 B1</p>
+<table>
+<thead><tr>
+<th>bid</th>
+<th>bname</th>
+<th>color</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>101</td>
+<td>tiger</td>
+<td>red</td>
+</tr>
+<tr>
+<td>102</td>
+<td>lion</td>
+<td>green</td>
+</tr>
+<tr>
+<td>103</td>
+<td>hero</td>
+<td>blue</td>
+</tr>
+</tbody>
+</table>
+<p>水手订购船信息 R1</p>
+<table>
+<thead><tr>
+<th>sid</th>
+<th>bid</th>
+<th>day</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>22</td>
+<td>101</td>
+<td>10/10/96</td>
+</tr>
+<tr>
+<td>58</td>
+<td>103</td>
+<td>11/12/96</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pymysql</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">pymysql</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="n">user</span><span class="o">=</span><span class="s1">&#39;root&#39;</span><span class="p">,</span><span class="n">password</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;USE SAILORANDBOAT&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">exec_sql</span><span class="p">(</span><span class="n">sql</span><span class="p">):</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#22522;&#26412;&#30340;SQL&#26597;&#35810;&#32467;&#26500;">&#22522;&#26412;&#30340;SQL&#26597;&#35810;&#32467;&#26500;<a class="anchor-link" href="#&#22522;&#26412;&#30340;SQL&#26597;&#35810;&#32467;&#26500;">&#182;</a></h2><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="p">[</span><span class="k">DISTINCT</span><span class="p">]</span> <span class="n">target</span><span class="o">-</span><span class="n">list</span>
+<span class="k">FROM</span> <span class="n">relation</span><span class="o">-</span><span class="n">list</span>
+<span class="k">WHERE</span> <span class="n">qualification</span>
+</pre></div>
 <ul>
-<li><code>-1</code>表示没有匹配,可以退出了</li>
-<li><code>i = 0-n</code>表示去<code>i</code>看看,如果<code>i</code>不行可以去<code>next[i]</code>看看</li>
+<li>target-list 查询结果</li>
+<li>relation-list 从那些表里查</li>
+<li>qualification 查询结果应该满足的条件</li>
+</ul>
+<p>与关系演算的关系
+$$
+\{select\ target-list | (From\ relation-list)\  \wedge (WHERE\ qualification)\}
+$$</p>
+<p>SQL查询的基本执行策略:</p>
+<ul>
+<li>根据<code>FROM</code>中的<code>relation-list</code>进行笛卡尔乘积</li>
+<li>利用<code>WHERE</code>中的 条件<code>qualification</code>进行筛选</li>
+<li>根据<code>SELECT</code>中的<code>target-list</code>做一次投影[以及对结果的排序,去重复]</li>
+</ul>
+<h3 id="&#20363;1">&#20363;1<a class="anchor-link" href="#&#20363;1">&#182;</a></h3><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">S</span><span class="p">.</span><span class="n">sname</span>
+<span class="k">FROM</span> <span class="n">Sailors</span> <span class="n">S</span><span class="p">,</span><span class="n">Reserves</span> <span class="n">R</span>
+<span class="k">WHERE</span> <span class="n">S</span><span class="p">.</span><span class="n">sid</span> <span class="o">=</span> <span class="n">R</span><span class="p">.</span><span class="n">sid</span> <span class="k">AND</span> <span class="n">R</span><span class="p">.</span><span class="n">bid</span> <span class="o">=</span> <span class="mi">103</span>
+</pre></div>
+<p>该例的概念执行流程</p>
+<ul>
+<li>S,R先进行笛卡尔乘积</li>
+<li>进行筛选</li>
+<li>投影姓名</li>
 </ul>
 
 </div>
@@ -13095,22 +13281,18 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[61]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">getNext</span><span class="p">(</span><span class="n">pattern</span><span class="p">):</span>
-    <span class="n">j</span><span class="p">,</span><span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span>
-    <span class="n">pattern_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span> 
-    <span class="nb">next</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">pattern_len</span>
-    <span class="nb">next</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-    <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">pattern_len</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">pattern</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="n">pattern</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
-            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="nb">next</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span>
-        <span class="k">else</span><span class="p">:</span> 
-            <span class="n">k</span> <span class="o">=</span> <span class="nb">next</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
-    <span class="k">return</span> <span class="nb">next</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">exec_sql</span><span class="p">(</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">SELECT S1.sname</span>
+<span class="s2">FROM S1,R1</span>
+<span class="s2">WHERE S1.sid = R1.sid</span>
+<span class="s2">UNION</span>
+<span class="s2">SELECT S2.sname</span>
+<span class="s2">FROM S2,R1</span>
+<span class="s2">WHERE S2.sid = R1.sid</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13123,15 +13305,14 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[10]:</div>
+    <div class="prompt"></div>
 
 
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[-1, 0, 0, 0, 1, 2, 3]</pre>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(&#39;dustin&#39;,)
+(&#39;rusty&#39;,)
+</pre>
 </div>
-
 </div>
 
 </div>
@@ -13141,32 +13322,58 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Next&#25968;&#32452;&#30340;&#24212;&#29992;">Next&#25968;&#32452;&#30340;&#24212;&#29992;<a class="anchor-link" href="#Next&#25968;&#32452;&#30340;&#24212;&#29992;">&#182;</a></h2><p>虽然是while循环,但是while循环并不是每一次都用来前进的,也可能是装轨</p>
-<p>但是总的前进方向是正确的</p>
+<h2 id="&#20363;2">&#20363;2<a class="anchor-link" href="#&#20363;2">&#182;</a></h2><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">S</span><span class="p">.</span><span class="n">age</span><span class="p">,</span><span class="n">age1</span><span class="o">=</span><span class="n">S</span><span class="p">.</span><span class="n">age</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">S</span><span class="p">.</span><span class="n">age</span> <span class="k">As</span> <span class="n">age2</span>
+<span class="k">FROM</span> <span class="n">Sailors</span> <span class="n">S</span>
+<span class="k">WHERE</span> <span class="n">S</span><span class="p">.</span><span class="n">snname</span> <span class="k">like</span> <span class="s1">&#39;B_%B&#39;</span>
+</pre></div>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[62]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">kmp</span><span class="p">(</span><span class="n">string</span><span class="p">,</span><span class="n">pattern</span><span class="p">):</span>
-    <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span>
-    <span class="nb">next</span> <span class="o">=</span> <span class="n">getNext</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
-    <span class="k">while</span>  <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>  <span class="ow">and</span>  <span class="n">j</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span> <span class="p">:</span>
-        <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">string</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">pattern</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
-            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">j</span> <span class="o">=</span> <span class="nb">next</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">i</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">exec_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">SELECT S1.age,S1.age-5 AS age1, 2*S1.age As age2</span>
+<span class="s2">FROM S2 AS S1</span>
+<span class="s2">WHERE S1.sname LIKE &#39;%y%&#39;</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
 
-<span class="n">kmp</span><span class="p">(</span><span class="s2">&quot;abcdabceabc&quot;</span><span class="p">,</span><span class="s2">&quot;abce&quot;</span><span class="p">)</span>
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>嵌套查询:</p>
+<ul>
+<li>非关联嵌套查询</li>
+<li>关联嵌套查询</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[63]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 非关联嵌套查询-找到订过103的水手</span>
+<span class="n">exec_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">SELECT S1.sname </span>
+<span class="s2">FROM S1</span>
+<span class="s2">WHERE S1.sid in (</span>
+<span class="s2">    SELECT R.sid</span>
+<span class="s2">    FROM R1 as R</span>
+<span class="s2">    WHERE R.bid=103</span>
+<span class="s2">    )</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13179,15 +13386,94 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[20]:</div>
+    <div class="prompt"></div>
 
 
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>4</pre>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(&#39;rusty&#39;,)
+</pre>
+</div>
 </div>
 
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[71]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 关联嵌套查询-找到订过103的水手</span>
+<span class="n">exec_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">SELECT S.sname</span>
+<span class="s2">FROM S1 AS S</span>
+<span class="s2">WHERE EXISTS (</span>
+<span class="s2">    SELECT * </span>
+<span class="s2">    FROM R1 AS R</span>
+<span class="s2">    WHERE R.bid=103 AND S.sid=R.sid </span>
+<span class="s2">    )</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(&#39;rusty&#39;,)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[70]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># 预定过103且只有一个水手预定过的船</span>
+<span class="n">exec_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">SELECT bid</span>
+<span class="s2">FROM R1 AS R</span>
+<span class="s2">WHERE bid NOT IN(</span>
+<span class="s2">    SELECT bid </span>
+<span class="s2">    FROM R1 AS R2 </span>
+<span class="s2">    WHERE R2.sid!=R.sid </span>
+<span class="s2">    )</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(101,)
+(103,)
+</pre>
+</div>
 </div>
 
 </div>
@@ -13197,18 +13483,451 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>两个步骤的相似于不同:</p>
-<ul>
-<li>双指针</li>
-<li>while循环只代表一个指针的单调递增</li>
-<li>循环内的副指针能够通过指示进行回溯</li>
-<li>使用 <code>-1</code> 表示没有双指针共同前进,及全无关情况</li>
+<h2 id="SQL&#25903;&#25345;&#30340;&#27604;&#36739;&#25805;&#20316;">SQL&#25903;&#25345;&#30340;&#27604;&#36739;&#25805;&#20316;<a class="anchor-link" href="#SQL&#25903;&#25345;&#30340;&#27604;&#36739;&#25805;&#20316;">&#182;</a></h2><ul>
+<li>ANY</li>
+<li>ALL</li>
+<li>SOME</li>
+<li>IN</li>
+<li>NOT IN</li>
+<li>EXISTS</li>
+<li>NOT EXISTS</li>
+<li>&gt;</li>
+<li>&lt;</li>
+<li>&lt;=</li>
+<li>&gt;=</li>
+<li>≠ 在mysql中是 &lt;&gt;</li>
 </ul>
-<p>这道题目给我的其实应该是一种匹配模式</p>
-<ul>
-<li>使用外挂信息记录跳转</li>
-<li>while循环并非递增</li>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>查找预定了红船或绿船的水手的姓名</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[76]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">exec_sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">SELECT S1.sname </span>
+<span class="s2">FROM S1</span>
+<span class="s2">WHERE S1.sid IN(</span>
+<span class="s2">    SELECT R1.sid</span>
+<span class="s2">    FROM R1,B1</span>
+<span class="s2">    WHERE R1.bid=B1.bid AND B1.color=&quot;red&quot;</span>
+<span class="s2">    UNION</span>
+<span class="s2">    SELECT R1.sid</span>
+<span class="s2">    FROM R1,B1</span>
+<span class="s2">    WHERE R1.bid=B1.bid AND B1.color=&quot;green&quot;</span>
+<span class="s2">)</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(&#39;dustin&#39;,)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[77]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="SQL&#20013;&#30340;&#38500;&#27861;">SQL&#20013;&#30340;&#38500;&#27861;<a class="anchor-link" href="#SQL&#20013;&#30340;&#38500;&#27861;">&#182;</a></h2><ul>
+<li>找到订购过所有船的水手</li>
+<li>找到一个水手,这个水手不可能存在没订过某一种船</li>
 </ul>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">S</span><span class="p">.</span><span class="n">sname</span> 
+<span class="k">FROM</span> <span class="n">Sailors</span> <span class="n">S</span>
+<span class="o">-</span> <span class="err">不存在满足下述条件元素</span>
+<span class="k">WHERE</span> <span class="k">NOT</span> <span class="k">EXISTS</span><span class="p">(</span> 
+    <span class="o">-</span> <span class="err">选出所有船</span>
+    <span class="p">(</span><span class="k">SELECT</span> <span class="n">B</span><span class="p">.</span><span class="n">bid</span>
+     <span class="k">FROM</span> <span class="n">Boats</span> <span class="n">B</span><span class="p">)</span>
+     <span class="k">EXCEPT</span>
+    <span class="o">-</span> <span class="err">减去水手曾经预过的船</span>
+    <span class="p">(</span><span class="k">SELECT</span> <span class="n">R</span><span class="p">.</span><span class="n">bid</span>
+     <span class="k">FROM</span> <span class="n">Reserves</span> <span class="n">R</span>
+     <span class="k">WHERE</span> <span class="n">R</span><span class="p">.</span><span class="n">sid</span><span class="o">=</span><span class="n">S</span><span class="p">.</span><span class="n">sid</span><span class="p">)</span> 
+<span class="p">)</span>
+</pre></div>
+<p>不使用<code>EXCEPT</code>的方法</p>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">S</span><span class="p">.</span><span class="n">sname</span>
+<span class="k">FROM</span> <span class="n">Sailors</span> <span class="n">S</span>
+<span class="o">-</span> <span class="err">不存在这样的船</span>
+<span class="k">WHERE</span> <span class="k">NOT</span> <span class="k">EXISTS</span><span class="p">(</span>
+    <span class="k">SELECT</span> <span class="n">B</span><span class="p">.</span><span class="n">bid</span>
+    <span class="k">FROM</span> <span class="n">Boats</span> <span class="n">B</span>
+    <span class="o">-</span> <span class="err">什么样的船</span><span class="p">,</span><span class="err">没有订购过的船</span>
+    <span class="k">WHERE</span> <span class="k">NOT</span> <span class="k">EXISTS</span><span class="p">(</span>
+        <span class="k">SELECT</span> <span class="n">R</span><span class="p">.</span><span class="n">bid</span> 
+        <span class="k">FROM</span> <span class="n">Reserves</span> <span class="n">R</span>
+        <span class="k">WHERE</span> <span class="n">R</span><span class="p">.</span><span class="n">bid</span><span class="o">=</span><span class="n">B</span><span class="p">.</span><span class="n">bid</span> <span class="k">AND</span> <span class="n">R</span><span class="p">.</span><span class="n">sid</span><span class="o">=</span><span class="n">S</span><span class="p">.</span><span class="n">sid</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#32858;&#38598;&#20989;&#25968;&#36816;&#31639;">&#32858;&#38598;&#20989;&#25968;&#36816;&#31639;<a class="anchor-link" href="#&#32858;&#38598;&#20989;&#25968;&#36816;&#31639;">&#182;</a></h2><ul>
+<li>COUNT(*) :计算元组个数</li>
+<li>COUNT([DISTINCT]A) :查找唯一数</li>
+<li>SUM([DISTINCT]A) </li>
+<li>avg([DISTINCT]A)</li>
+<li>MAX(A)</li>
+<li>MIN(A)</li>
+</ul>
+<blockquote><p>A代表一列</p>
+</blockquote>
+<p>错误示例:查找年龄最大的水手的姓名</p>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">S</span><span class="p">.</span><span class="n">sname</span><span class="p">,</span><span class="k">MAX</span><span class="p">(</span><span class="n">S</span><span class="p">.</span><span class="n">age</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">Sailors</span> <span class="n">S</span>
+</pre></div>
+<p>正确写法:</p>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">S</span><span class="p">.</span><span class="n">sname</span><span class="p">,</span><span class="n">S</span><span class="p">.</span><span class="n">age</span>
+<span class="k">FROM</span> <span class="n">Sailors</span> <span class="n">S</span>
+<span class="k">WHERE</span> <span class="n">S</span><span class="p">.</span><span class="n">age</span><span class="o">=</span><span class="p">(</span>
+    <span class="k">SELECT</span> <span class="k">MAX</span><span class="p">(</span><span class="n">S</span><span class="p">.</span><span class="n">age</span><span class="p">)</span>
+    <span class="k">FROM</span> <span class="n">Sailors</span> <span class="n">S2</span>
+<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="GROUP&#26041;&#27861;,&#20998;&#32452;&#36816;&#31639;">GROUP&#26041;&#27861;,&#20998;&#32452;&#36816;&#31639;<a class="anchor-link" href="#GROUP&#26041;&#27861;,&#20998;&#32452;&#36816;&#31639;">&#182;</a></h2><p>需求:找到每个级别中最年轻的水手</p>
+<p>引人分组计算之后的SQL基本框架</p>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="p">[</span><span class="k">DISTINCT</span><span class="p">]</span> <span class="n">target</span><span class="o">-</span><span class="n">list</span>
+<span class="k">FROM</span> <span class="n">relation</span><span class="o">-</span><span class="n">list</span>
+<span class="k">WHERE</span> <span class="n">qualification</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="k">grouping</span><span class="o">-</span><span class="n">list</span>
+<span class="k">HAVING</span> <span class="k">grouping</span><span class="o">-</span><span class="n">qualification</span>
+</pre></div>
+<ul>
+<li>grouping-list </li>
+<li>grouping-qualification </li>
+</ul>
+<p>分组运算,引入后,SELECT中可以出现:<code>共同属性</code>,<code>聚集计算结果</code></p>
+<p>此时,在分组框架下的SQL的概念执行流程</p>
+<ol>
+<li>计算笛卡尔积relation-list</li>
+<li>计算筛选qualification</li>
+<li>计算分组 grouping-list,按照分组属性值相等元组</li>
+<li>计算 grouping-qualification 检查,过滤</li>
+<li>计算 合格组的计算 也就是SELECT后面的<code>共同属性</code>或者<code>聚集计算</code></li>
+</ol>
+<blockquote><p>机器的实现方式:</p>
+<ul>
+<li>按照分组属性的值进行排序  </li>
+<li>再进行分组HAVING计算</li>
+</ul>
+</blockquote>
+<p>共同属性必须是分组属性的子集</p>
+<p>例,找到每一个级别最年轻水手级别,年龄需要大于18,并且得存在,得大于1</p>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">S</span><span class="p">.</span><span class="n">rating</span><span class="p">,</span> <span class="k">MIN</span><span class="p">(</span><span class="n">S</span><span class="p">.</span><span class="n">age</span><span class="p">)</span> <span class="k">AS</span> <span class="n">minage</span>
+<span class="k">FROM</span> <span class="n">Sailors</span> <span class="n">S</span>
+<span class="k">WHERE</span> <span class="n">S</span><span class="p">.</span><span class="n">age</span> <span class="o">&gt;</span> <span class="mi">18</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">S</span><span class="p">.</span><span class="n">rating</span>
+<span class="k">HAVING</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">AND</span> <span class="k">EVERY</span> <span class="p">(</span><span class="n">S</span><span class="p">.</span><span class="n">age</span> <span class="o">&lt;=</span> <span class="mi">60</span><span class="p">)</span>
+</pre></div>
+<blockquote><p>EVERY 组内每一个元素需要满足要求</p>
+</blockquote>
+<p><strong>例2</strong>: 连接基础上的 group by 统计每条红船的预定情况</p>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">B</span><span class="p">.</span><span class="n">bid</span><span class="p">,</span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">AS</span> <span class="k">count</span>
+<span class="k">FROM</span> <span class="n">Boats</span> <span class="n">B</span><span class="p">,</span><span class="n">Reserves</span> <span class="n">R</span>
+<span class="k">WHERE</span> <span class="n">R</span><span class="p">.</span><span class="n">bid</span><span class="o">=</span><span class="n">B</span><span class="p">.</span><span class="n">bid</span> <span class="k">AND</span> <span class="n">B</span><span class="p">.</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">B</span><span class="p">.</span><span class="n">bid</span>
+</pre></div>
+<p>研究下面的SQL</p>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">B</span><span class="p">.</span><span class="n">bid</span><span class="p">,</span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">AS</span> <span class="k">count</span>
+<span class="k">FROM</span> <span class="n">Boats</span> <span class="n">B</span><span class="p">,</span><span class="n">Reserves</span> <span class="n">R</span>
+<span class="k">WHERE</span> <span class="n">R</span><span class="p">.</span><span class="n">bid</span><span class="o">=</span><span class="n">B</span><span class="p">.</span><span class="n">bid</span> 
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">B</span><span class="p">.</span><span class="n">bid</span>
+<span class="k">HAVING</span> <span class="n">B</span><span class="p">.</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span>
+</pre></div>
+<blockquote><p>问题:<code>共同属性</code>必须是分组属性,HAVING使用的属性不是分组属性,所以这条语句应该无法通过数据库的语法检查</p>
+</blockquote>
+<p>合格的写法:</p>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">B</span><span class="p">.</span><span class="n">bid</span><span class="p">,</span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">AS</span> <span class="k">count</span>
+<span class="k">FROM</span> <span class="n">Boats</span> <span class="n">B</span><span class="p">,</span><span class="n">Reserves</span> <span class="n">R</span>
+<span class="k">WHERE</span> <span class="n">R</span><span class="p">.</span><span class="n">bid</span><span class="o">=</span><span class="n">B</span><span class="p">.</span><span class="n">bid</span> 
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">B</span><span class="p">.</span><span class="n">bid</span><span class="p">,</span><span class="n">B</span><span class="p">.</span><span class="n">color</span>
+<span class="k">HAVING</span> <span class="n">B</span><span class="p">.</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span>
+</pre></div>
+<p><strong>例3</strong>:Having里的嵌套子查询</p>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">S</span><span class="p">.</span><span class="n">rating</span><span class="p">,</span> <span class="k">MIN</span><span class="p">(</span><span class="n">S</span><span class="p">.</span><span class="n">age</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">Sailors</span> <span class="n">S</span>
+<span class="k">WHERE</span> <span class="n">S</span><span class="p">.</span><span class="n">age</span> <span class="o">&gt;</span> <span class="mi">18</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">S</span><span class="p">.</span><span class="n">rating</span>
+<span class="k">HAVING</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="p">(</span>
+    <span class="k">SELECT</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> 
+    <span class="k">FROM</span> <span class="n">Sailors</span> <span class="n">S2</span>
+    <span class="k">WHERE</span> <span class="n">S2</span><span class="p">.</span><span class="n">rating</span><span class="o">=</span><span class="n">S</span><span class="p">.</span><span class="n">rating</span>
+<span class="p">)</span>
+</pre></div>
+<blockquote><p><strong>聚集函数无法嵌套</strong>: MIN(AVG(...)),FALSE</p>
+</blockquote>
+<p><strong>例子4</strong>:FROM中的嵌套查询</p>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">Temp</span><span class="p">.</span><span class="n">rating</span>
+<span class="k">FROM</span> <span class="p">(</span> 
+    <span class="k">SELECT</span> <span class="n">S</span><span class="p">.</span><span class="n">rating</span><span class="p">,</span><span class="k">AVG</span><span class="p">(</span><span class="n">S</span><span class="p">.</span><span class="k">avg</span><span class="p">)</span> <span class="k">AS</span> <span class="n">avgage</span> 
+    <span class="k">FROM</span> <span class="n">Sailors</span> <span class="n">S</span>
+    <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">S</span><span class="p">.</span><span class="n">rating</span>
+    <span class="p">)</span> <span class="k">AS</span> <span class="n">Temp</span>
+<span class="k">WHERE</span> <span class="n">Temp</span><span class="p">.</span><span class="n">avgage</span> <span class="o">=</span> <span class="p">(</span><span class="k">SELECT</span> <span class="k">MIN</span><span class="p">(</span><span class="n">Temp</span><span class="p">.</span><span class="n">avage</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#31354;&#20540;&#38382;&#39064;">&#31354;&#20540;&#38382;&#39064;<a class="anchor-link" href="#&#31354;&#20540;&#38382;&#39064;">&#182;</a></h2><p>引入特殊的运算符,对空值进行判断</p>
+<ul>
+<li>S.rating &gt; 8 空值怎么办?</li>
+<li>x AND NULL 怎么办?</li>
+<li>三值逻辑: 真(True)假(False)未知(unknown)</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#26032;&#29305;&#24615;">&#26032;&#29305;&#24615;<a class="anchor-link" href="#&#26032;&#29305;&#24615;">&#182;</a></h2><ul>
+<li>CAST 表达式</li>
+<li>CASE 表达式</li>
+<li>Sub-query</li>
+<li>Outer Join</li>
+<li>Recursion 递归查询</li>
+</ul>
+<h3 id="CAST">CAST<a class="anchor-link" href="#CAST">&#182;</a></h3><p>类似强制类型转换</p>
+<ul>
+<li>CAST ( NULL as DataType )</li>
+<li>CAST ( expression as DataType )</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">VIEW</span> <span class="n">prospects</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">school</span><span class="p">,</span><span class="n">service</span><span class="p">)</span> <span class="k">AS</span>
+    <span class="k">SELECT</span> <span class="n">name</span><span class="p">,</span><span class="n">school</span><span class="p">,</span><span class="k">CAST</span><span class="p">(</span><span class="k">NULL</span> <span class="k">AS</span> <span class="nb">Varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>
+    <span class="k">FROM</span> <span class="n">Students</span>
+<span class="k">UNION</span>
+    <span class="k">SELECT</span> <span class="n">name</span><span class="p">,</span><span class="k">CASE</span><span class="p">(</span><span class="k">NULL</span> <span class="k">AS</span> <span class="nb">Varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>
+    <span class="k">FROM</span> <span class="n">Soldiers</span>
+</pre></div>
+<h3 id="CASE">CASE<a class="anchor-link" href="#CASE">&#182;</a></h3><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">name</span><span class="p">,</span><span class="k">CASE</span> <span class="n">status</span>
+    <span class="k">WHEN</span> <span class="mi">1</span> <span class="k">THEN</span> <span class="s1">&#39;Active Duty&#39;</span> 
+    <span class="k">WHEN</span> <span class="mi">2</span> <span class="k">THEN</span> <span class="s1">&#39;Reserve&#39;</span>
+    <span class="k">WHEN</span> <span class="mi">3</span> <span class="k">THEN</span> <span class="s1">&#39;SA&#39;</span>
+    <span class="k">WHEN</span> <span class="mi">4</span> <span class="k">THEN</span> <span class="s1">&#39;Retired&#39;</span>
+    <span class="k">ELSE</span> <span class="s1">&#39;Unknown&#39;</span>
+    <span class="k">END</span> <span class="k">As</span> <span class="n">status</span>
+<span class="k">FROM</span> <span class="n">Offices</span>
+</pre></div>
+<p>例:</p>
+<div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">Machines</span><span class="p">(</span><span class="n">serialno</span><span class="p">,</span><span class="k">type</span><span class="p">,</span><span class="k">year</span><span class="p">,</span><span class="n">hours_used</span><span class="p">,</span><span class="n">accidents</span><span class="p">)</span>
+
+<span class="k">SELECT</span> <span class="k">sum</span><span class="p">(</span>
+    <span class="k">CASE</span> 
+        <span class="k">WHEN</span> <span class="k">type</span><span class="o">=</span><span class="s1">&#39;chain saw&#39;</span> <span class="k">THEN</span> <span class="n">accidents</span> 
+        <span class="k">ELSE</span> <span class="mi">0</span><span class="n">e0</span> 
+        <span class="k">END</span>
+    <span class="p">)</span><span class="o">/</span><span class="k">sum</span><span class="p">(</span><span class="n">accidents</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">Machines</span><span class="p">;</span>
+</pre></div>
+<h3 id="Sub-Query">Sub-Query<a class="anchor-link" href="#Sub-Query">&#182;</a></h3><p>子查询的三类:</p>
+<ul>
+<li>Scalar sub-qeuery 标量子查询 </li>
+<li>Table expression 表达式 </li>
+<li>Common table expression 公共表表达式</li>
+</ul>
+<h4 id="Scalar-sub-qeuery">Scalar sub-qeuery<a class="anchor-link" href="#Scalar-sub-qeuery">&#182;</a></h4><p>查询结果只是一个值,所以按照sql的文法,凡是出现一个值的地方都可以出现一个<code>Scalar sub-qeuery</code></p>
+<p>例1:</p>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">d</span><span class="p">.</span><span class="n">deptname</span><span class="p">,</span><span class="n">d</span><span class="p">.</span><span class="k">location</span>
+<span class="k">FROM</span> <span class="n">dept</span> <span class="k">AS</span> <span class="n">d</span>
+<span class="k">WHERE</span><span class="p">(</span>
+    <span class="k">SELECT</span> <span class="k">AVG</span><span class="p">(</span><span class="n">bouns</span><span class="p">)</span> 
+    <span class="k">FROM</span> <span class="n">emp</span>
+    <span class="k">WHERE</span> <span class="n">deptno</span><span class="o">=</span><span class="n">d</span><span class="p">.</span><span class="n">deptno</span>
+    <span class="p">)</span><span class="o">&gt;</span><span class="p">(</span>
+    <span class="k">SELECT</span> <span class="k">AVG</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span>
+    <span class="k">FROM</span> <span class="n">emp</span>
+    <span class="k">WHERE</span> <span class="n">deptno</span><span class="o">=</span><span class="n">d</span><span class="p">.</span><span class="n">deptno</span>
+    <span class="p">)</span>
+</pre></div>
+<p>例2:SELECT中出现的查询</p>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">d</span><span class="p">.</span><span class="n">deptno</span><span class="p">,</span><span class="n">d</span><span class="p">.</span><span class="n">deptname</span><span class="p">,(</span><span class="k">SELECT</span> <span class="k">MAX</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span>
+                   <span class="k">FROM</span> <span class="n">emp</span>
+                   <span class="k">WHERE</span> <span class="n">deptno</span><span class="o">=</span><span class="n">d</span><span class="p">.</span><span class="n">deptno</span><span class="p">)</span> <span class="k">As</span> <span class="n">maxpay</span>
+<span class="k">FROM</span> <span class="n">dept</span> <span class="k">AS</span> <span class="n">d</span>
+<span class="k">WHERE</span> <span class="n">d</span><span class="p">.</span><span class="k">location</span><span class="o">=</span><span class="s1">&#39;New York&#39;</span>
+</pre></div>
+<h4 id="Table-expression">Table expression<a class="anchor-link" href="#Table-expression">&#182;</a></h4><p>表达式:查询结果也是一张表</p>
+<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">startyear</span><span class="p">,</span><span class="k">avg</span><span class="p">(</span><span class="n">pay</span><span class="p">)</span>
+<span class="k">FROM</span><span class="p">(</span> <span class="k">SELECT</span> <span class="n">name</span><span class="p">,</span><span class="n">salary</span><span class="o">+</span><span class="n">bouns</span> <span class="k">AS</span> <span class="n">pay</span><span class="p">,</span><span class="k">year</span><span class="p">(</span><span class="n">startdate</span><span class="p">)</span><span class="k">as</span> <span class="n">startyear</span> 
+    <span class="k">FROM</span> <span class="n">emp</span><span class="p">)</span> <span class="k">AS</span> <span class="n">emp2</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">startyear</span><span class="p">;</span>
+</pre></div>
+<p>在FROM子句里面在一张子句上进行查找</p>
+<h4 id="Common-table-expression">Common table expression<a class="anchor-link" href="#Common-table-expression">&#182;</a></h4><p>公共表表达式:复杂查询中表可能使用多次</p>
+<p><code>WITH</code>子句,相当于是临时视图(View)</p>
+<div class="highlight"><pre><span></span><span class="k">WITH</span> <span class="n">payroll</span><span class="p">(</span><span class="n">deptno</span><span class="p">,</span><span class="n">totalpay</span><span class="p">)</span> <span class="k">AS</span>
+   <span class="p">(</span> <span class="k">SELECT</span> <span class="n">deptno</span><span class="p">,</span><span class="k">sum</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span><span class="o">+</span><span class="k">sum</span><span class="p">(</span><span class="n">bouns</span><span class="p">)</span>
+    <span class="k">FROM</span> <span class="n">emp</span>
+    <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">deptno</span><span class="p">)</span>
+<span class="o">-</span> <span class="err">真正的查询开始的地方</span>
+<span class="k">SELECT</span> <span class="n">deptno</span>
+<span class="k">FROM</span> <span class="n">payroll</span>
+<span class="k">WHERE</span> <span class="n">totalpay</span> <span class="o">=</span> <span class="p">(</span><span class="k">SELECT</span> <span class="k">max</span><span class="p">(</span><span class="n">totalpay</span><span class="p">)</span>
+            <span class="k">FROM</span> <span class="n">payroll</span><span class="p">);</span>
+</pre></div>
+<h3 id="Outer-Join">Outer Join<a class="anchor-link" href="#Outer-Join">&#182;</a></h3><p>使用公共表表达式表达外连接
+引入<code>WITH</code>后的SQL</p>
+<div class="highlight"><pre><span></span><span class="k">WITH</span> 
+    <span class="n">table1</span><span class="p">(</span><span class="n">attr1</span><span class="p">,</span><span class="n">attr2</span><span class="p">,...)</span> <span class="k">AS</span> <span class="p">(</span>
+        <span class="k">SELECT</span> <span class="p">...</span>
+        <span class="k">FROM</span> <span class="p">...</span>
+        <span class="k">WHERE</span> <span class="p">...</span>
+        <span class="k">GROUP</span> <span class="k">BY</span> <span class="p">...</span>
+        <span class="k">HAVING</span> <span class="p">...</span>
+    <span class="p">)</span>
+    <span class="n">table1</span><span class="p">(</span><span class="n">attr1</span><span class="p">,</span><span class="n">attr2</span><span class="p">,...)</span> <span class="k">AS</span> <span class="p">(</span>
+        <span class="k">SELECT</span> <span class="p">...</span>
+        <span class="k">FROM</span> <span class="p">...</span>
+        <span class="k">WHERE</span> <span class="p">...</span>
+        <span class="k">GROUP</span> <span class="k">BY</span> <span class="p">...</span>
+        <span class="k">HAVING</span> <span class="p">...</span>
+    <span class="p">)</span>
+    <span class="p">...</span>
+<span class="k">SELECT</span> <span class="p">...</span>
+<span class="k">FROM</span> <span class="p">...</span>
+<span class="k">WHERE</span> <span class="p">...</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="p">...</span>
+<span class="k">HAVING</span> <span class="p">...</span>
+</pre></div>
+<h3 id="&#36882;&#24402;&#26597;&#35810;">&#36882;&#24402;&#26597;&#35810;<a class="anchor-link" href="#&#36882;&#24402;&#26597;&#35810;">&#182;</a></h3><p>公共表自调用</p>
+<div class="highlight"><pre><span></span><span class="k">WITH</span> <span class="n">agents</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">salary</span><span class="p">)</span> <span class="k">AS</span>
+   <span class="p">((</span><span class="k">SELECT</span> <span class="n">name</span><span class="p">,</span><span class="n">salary</span>
+    <span class="k">FROM</span> <span class="n">FedEmp</span>
+    <span class="k">WHERE</span> <span class="n">manager</span><span class="o">=</span><span class="s1">&#39;Hoover&#39;</span><span class="p">)</span>
+   <span class="k">UNION</span> <span class="k">ALL</span>
+    <span class="p">(</span><span class="k">SELECT</span> <span class="n">f</span><span class="p">.</span><span class="n">name</span><span class="p">,</span><span class="n">f</span><span class="p">.</span><span class="n">salary</span>
+     <span class="k">FROM</span> <span class="n">agents</span> <span class="k">AS</span> <span class="n">a</span><span class="p">,</span><span class="n">FedEmp</span> <span class="k">as</span> <span class="n">f</span>
+     <span class="k">WHERE</span> <span class="n">f</span><span class="p">.</span><span class="n">manager</span><span class="o">=</span><span class="n">a</span><span class="p">.</span><span class="n">name</span>
+    <span class="p">)</span>
+   <span class="p">)</span>
+<span class="k">SELECT</span> <span class="n">name</span>
+<span class="k">FROM</span> <span class="n">agents</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#25968;&#25454;&#25805;&#32437;&#35821;&#35328;DML">&#25968;&#25454;&#25805;&#32437;&#35821;&#35328;DML<a class="anchor-link" href="#&#25968;&#25454;&#25805;&#32437;&#35821;&#35328;DML">&#182;</a></h2><ul>
+<li>Insert : 插入</li>
+<li>Delete : 删除 DELETE FROM Person WHERE LastName='..';</li>
+<li>Update : 更新 UPDATE Person SET Address='',..=... WHERE LastName='...'</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#23884;&#20837;&#24335;SQL&#30340;&#23454;&#29616;&#26041;&#24335;">&#23884;&#20837;&#24335;SQL&#30340;&#23454;&#29616;&#26041;&#24335;<a class="anchor-link" href="#&#23884;&#20837;&#24335;SQL&#30340;&#23454;&#29616;&#26041;&#24335;">&#182;</a></h2><p>在编程语言中嵌入<code>sql</code>的执行:</p>
+<ul>
+<li>连接数据库</li>
+<li>执行 DDL/DML</li>
+<li>执行 Query 语句</li>
+<li>关闭连接</li>
+</ul>
+<p>游标机制(cursor):</p>
+<ul>
+<li>define 使用查询语句定义游标</li>
+<li>execute 打开游标,执行那条语句</li>
+<li>Fetch 使用游标来访问结果<code>文件</code></li>
+<li>close</li>
+</ul>
+<p>嵌入式的概念执行过程:</p>
+<ul>
+<li>嵌入C代码的源程序首先经过预编译(C语言编译器不认识,需要经过与编译器转换为C语言)</li>
+<li>转换后的C代码编译成机器码</li>
+<li>与调用库连接成可执行代码</li>
+</ul>
+<h2 id="&#21160;&#24577;SQL">&#21160;&#24577;SQL<a class="anchor-link" href="#&#21160;&#24577;SQL">&#182;</a></h2><ul>
+<li>能够直接执行</li>
+<li>支持动态参数</li>
+<li>动态查询</li>
+</ul>
+<h2 id="&#23384;&#20648;&#36807;&#31243;">&#23384;&#20648;&#36807;&#31243;<a class="anchor-link" href="#&#23384;&#20648;&#36807;&#31243;">&#182;</a></h2><p>用户可以把经常使用的一组SQL,存放在数据库系统中.</p>
+<ul>
+<li>系统会自动编译和优化存储的过程</li>
+<li>方便用户,提升系统的一致性</li>
+<li>提高DBMS的功能</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#35270;&#22270;-View">&#35270;&#22270; View<a class="anchor-link" href="#&#35270;&#22270;-View">&#182;</a></h2><ul>
+<li>普通视图 : 视图可以存储在系统中</li>
+<li>临时视图 : 计算完毕之后就没了</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">VIEW</span> <span class="n">YoungSailor</span> <span class="k">AS</span>
+    <span class="k">SELECT</span> <span class="n">sid</span><span class="p">,</span><span class="n">sname</span><span class="p">,</span><span class="n">rating</span>
+    <span class="k">FROM</span>  <span class="n">Sailors</span>
+    <span class="k">WHERE</span> <span class="n">age</span> <span class="o">&lt;</span> <span class="mi">26</span>
+</pre></div>
 
 </div>
 </div>

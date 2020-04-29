@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>dp</title>
+<title>2020年4月24日_02-数据模型</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13077,40 +13077,79 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="KMP&#31639;&#27861;">KMP&#31639;&#27861;<a class="anchor-link" href="#KMP&#31639;&#27861;">&#182;</a></h1><h2 id="KMP&#31639;&#27861;&#26377;&#20004;&#20010;&#20851;&#38190;&#30340;&#27493;&#39588;:">KMP&#31639;&#27861;&#26377;&#20004;&#20010;&#20851;&#38190;&#30340;&#27493;&#39588;:<a class="anchor-link" href="#KMP&#31639;&#27861;&#26377;&#20004;&#20010;&#20851;&#38190;&#30340;&#27493;&#39588;:">&#182;</a></h2><p>(1) Next 数组的生成<br>
-(2) Next 数组的应用</p>
-<h2 id="Next&#25968;&#32452;&#30340;&#21547;&#20041;:">Next&#25968;&#32452;&#30340;&#21547;&#20041;:<a class="anchor-link" href="#Next&#25968;&#32452;&#30340;&#21547;&#20041;:">&#182;</a></h2><p>Next函数的主要目的是为了挖掘匹配子串内部的相关性以及无关性</p>
-<p>如串<code>abcabcd</code>,该串前面的6个字符串是<code>abc</code>重复而成.</p>
-<p>如果文本<code>abcabc*</code>与串<code>abcabcd</code>已经匹配了前6个,
-此时若<code>*</code>是<code>d</code>那么文本可以与字符串匹配,若<code>*</code>不是<code>d</code>,直观来看可以判断是不是<code>a</code>,也就是串的第四个字符,
-能够这样直观进行的原因是我们知道<code>abcabcd</code>前面6个存在重复,且<code>abcabc*</code>已经匹配了6或者3个.</p>
-<p>数组的含义:</p>
-<ul>
-<li><code>-1</code>表示没有匹配,可以退出了</li>
-<li><code>i = 0-n</code>表示去<code>i</code>看看,如果<code>i</code>不行可以去<code>next[i]</code>看看</li>
+<h2 id="&#25968;&#25454;&#27169;&#22411;">&#25968;&#25454;&#27169;&#22411;<a class="anchor-link" href="#&#25968;&#25454;&#27169;&#22411;">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Schema">Schema<a class="anchor-link" href="#Schema">&#182;</a></h2><ul>
+<li>Physical Schema : 描述数据在磁盘上的存储</li>
+<li>Conceptual Schema : 关系数据库间表之间的逻辑模式 (基表)</li>
+<li>View : 用户视图</li>
 </ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#25968;&#25454;&#29420;&#31435;&#24615;">&#25968;&#25454;&#29420;&#31435;&#24615;<a class="anchor-link" href="#&#25968;&#25454;&#29420;&#31435;&#24615;">&#182;</a></h2><p>三级数据模式 + 两级映射 =&gt; 两级独立性</p>
+<ul>
+<li>逻辑数据独立性 : 逻辑结构变化不影响视图 </li>
+<li>物理数据独立性 : 物理结构变化不影响逻辑</li>
+</ul>
+<blockquote><p>使用数据库的最主要的优势!!!</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#20851;&#31995;&#22411;&#25968;&#25454;&#24211;&#30340;&#29702;&#35770;&#22522;&#30784;">&#20851;&#31995;&#22411;&#25968;&#25454;&#24211;&#30340;&#29702;&#35770;&#22522;&#30784;<a class="anchor-link" href="#&#20851;&#31995;&#22411;&#25968;&#25454;&#24211;&#30340;&#29702;&#35770;&#22522;&#30784;">&#182;</a></h2><ul>
+<li>每一个<code>属性</code>(attribute)对应的取值范围称为<code>域</code>(domin)</li>
+<li>每一个属性要满足两个条件:(1)原子性(2)允许某些属性值为空</li>
+<li>现实世界中的实体,或者实体之间的联系会被表示为<code>关系</code></li>
+<li>一个关系<code>R</code>实际上就是一个定义在所有属性取值范围上的N元联系</li>
+<li>$R\ with\ A_1,A_2,...,A_n$每一个属性对应的取值范围(域)$D_1,D_2,...,D_n$</li>
+<li>一个关系可以被形式化的表示为$R\ =( A_1/D_1,A_2/D_2,...,A_n/D_n)$或者$R\ =( A_1,A_2,...,A_n)$</li>
+<li>关系的实例组用$r表示$,其中$r = \{t_1,t_2,...,t_m\},t = &lt;v_1,v_2,...,v_n&gt;,v_i\in D_i$</li>
+<li>$t\in D_1\times D_2\times...\times D_n$(笛卡尔积)</li>
+<li>关系叫<code>表</code>,属性叫<code>域</code>,每一个实体元组叫<code>行</code></li>
+<li>候选键(ck,candidate key): (1)一个或者一组属性能够唯一确定一行;(2)这组属性的任何子集没有上述特性</li>
+<li>超键(sk,superkey): 满足候选键条件1,但是不满足条件2</li>
+<li>主键(pk,primary key): 候选键可能由有多组,主键属于其中的唯一一组</li>
+<li>全键(ak,all key): 主键由关系的所有属性确定</li>
+<li>外键(fk,foreign key): 能够引用另外关系的一组键(在那组关系中应该是主键,在本表中,<strong>外键不允许null</strong>)</li>
+<li>域完整性约束: 表中的每一个元组每一个属性的值满足约束</li>
+<li>实体完整性约束:<strong>关系主键不允许null</strong></li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>实例: <code>水手sailors</code>,<code>船只boats</code>,<code>预定reserves</code></p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">getNext</span><span class="p">(</span><span class="n">pattern</span><span class="p">):</span>
-    <span class="n">j</span><span class="p">,</span><span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span>
-    <span class="n">pattern_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span> 
-    <span class="nb">next</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">pattern_len</span>
-    <span class="nb">next</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-    <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">pattern_len</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">pattern</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="n">pattern</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
-            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="nb">next</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span>
-        <span class="k">else</span><span class="p">:</span> 
-            <span class="n">k</span> <span class="o">=</span> <span class="nb">next</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
-    <span class="k">return</span> <span class="nb">next</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pymysql</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">pymysql</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="n">user</span><span class="o">=</span><span class="s1">&#39;root&#39;</span><span class="p">,</span><span class="n">password</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;CREATE DATABASE IF NOT EXISTS SAILORANDBOAT;&quot;</span><span class="p">)</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;USE SAILORANDBOAT&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13123,13 +13162,13 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[10]:</div>
+    <div class="prompt output_prompt">Out[1]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[-1, 0, 0, 0, 1, 2, 3]</pre>
+<pre>0</pre>
 </div>
 
 </div>
@@ -13141,32 +13180,37 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Next&#25968;&#32452;&#30340;&#24212;&#29992;">Next&#25968;&#32452;&#30340;&#24212;&#29992;<a class="anchor-link" href="#Next&#25968;&#32452;&#30340;&#24212;&#29992;">&#182;</a></h2><p>虽然是while循环,但是while循环并不是每一次都用来前进的,也可能是装轨</p>
-<p>但是总的前进方向是正确的</p>
+<p>水手订购船信息 R1</p>
+<table>
+<thead><tr>
+<th>sid</th>
+<th>bid</th>
+<th>day</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>22</td>
+<td>101</td>
+<td>10/10/96</td>
+</tr>
+<tr>
+<td>58</td>
+<td>103</td>
+<td>11/12/96</td>
+</tr>
+</tbody>
+</table>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">kmp</span><span class="p">(</span><span class="n">string</span><span class="p">,</span><span class="n">pattern</span><span class="p">):</span>
-    <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span>
-    <span class="nb">next</span> <span class="o">=</span> <span class="n">getNext</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
-    <span class="k">while</span>  <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>  <span class="ow">and</span>  <span class="n">j</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span> <span class="p">:</span>
-        <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">string</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">pattern</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
-            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">j</span> <span class="o">=</span> <span class="nb">next</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">i</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
-
-<span class="n">kmp</span><span class="p">(</span><span class="s2">&quot;abcdabceabc&quot;</span><span class="p">,</span><span class="s2">&quot;abce&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;CREATE TABLE R1(sid INT(11),bid INT(11),day date);&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13179,13 +13223,83 @@ div#notebook {
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[20]:</div>
+    <div class="prompt output_prompt">Out[2]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>4</pre>
+<pre>0</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;INSERT INTO R1(sid,bid,day) VALUES(</span><span class="si">%d</span><span class="s2">,</span><span class="si">%d</span><span class="s2">,&#39;</span><span class="si">%s</span><span class="s2">&#39;)&quot;</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="o">%</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="s1">&#39;1996/10/10&#39;</span><span class="p">))</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="o">%</span><span class="p">(</span><span class="mi">58</span><span class="p">,</span><span class="mi">103</span><span class="p">,</span><span class="s1">&#39;1996/11/12&#39;</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[3]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>1</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;select * from R1&quot;</span><span class="p">)</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[4]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>((22, 101, datetime.date(1996, 10, 10)),
+ (58, 103, datetime.date(1996, 11, 12)))</pre>
 </div>
 
 </div>
@@ -13197,18 +13311,750 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>两个步骤的相似于不同:</p>
+<p>船信息 B1</p>
+<table>
+<thead><tr>
+<th>bid</th>
+<th>bname</th>
+<th>color</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>101</td>
+<td>tiger</td>
+<td>red</td>
+</tr>
+<tr>
+<td>102</td>
+<td>lion</td>
+<td>green</td>
+</tr>
+<tr>
+<td>103</td>
+<td>hero</td>
+<td>blue</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;CREATE TABLE B1(bid INT(11),bname varchar(15),color varchar(15));&quot;</span><span class="p">)</span>
+<span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;INSERT INTO B1(bid,bname,color) VALUES(</span><span class="si">%d</span><span class="s2">,&#39;</span><span class="si">%s</span><span class="s2">&#39;,&#39;</span><span class="si">%s</span><span class="s2">&#39;)&quot;</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="o">%</span><span class="p">(</span><span class="mi">101</span><span class="p">,</span><span class="s1">&#39;tiger&#39;</span><span class="p">,</span><span class="s1">&#39;red&#39;</span><span class="p">))</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="o">%</span><span class="p">(</span><span class="mi">102</span><span class="p">,</span><span class="s1">&#39;lion&#39;</span><span class="p">,</span><span class="s1">&#39;green&#39;</span><span class="p">))</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="o">%</span><span class="p">(</span><span class="mi">103</span><span class="p">,</span><span class="s1">&#39;lhero&#39;</span><span class="p">,</span><span class="s1">&#39;blue&#39;</span><span class="p">))</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;select * from B1&quot;</span><span class="p">)</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[5]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>((101, &#39;tiger&#39;, &#39;red&#39;), (102, &#39;lion&#39;, &#39;green&#39;), (103, &#39;lhero&#39;, &#39;blue&#39;))</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>水手信息 S1</p>
+<table>
+<thead><tr>
+<th>sid</th>
+<th>sname</th>
+<th>rating</th>
+<th>age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>22</td>
+<td>dustin</td>
+<td>7</td>
+<td>45.0</td>
+</tr>
+<tr>
+<td>31</td>
+<td>lubber</td>
+<td>8</td>
+<td>55.5</td>
+</tr>
+<tr>
+<td>58</td>
+<td>rusty</td>
+<td>10</td>
+<td>35.0</td>
+</tr>
+</tbody>
+</table>
+<p>水手信息 S2</p>
+<table>
+<thead><tr>
+<th>sid</th>
+<th>sname</th>
+<th>rating</th>
+<th>age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>28</td>
+<td>yuppy</td>
+<td>9</td>
+<td>35.0</td>
+</tr>
+<tr>
+<td>31</td>
+<td>lubber</td>
+<td>8</td>
+<td>55.5</td>
+</tr>
+<tr>
+<td>44</td>
+<td>guppy</td>
+<td>5</td>
+<td>35.0</td>
+</tr>
+<tr>
+<td>58</td>
+<td>rusty</td>
+<td>10</td>
+<td>35.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;CREATE TABLE S1(sid INT(11),sname varchar(15),rating INT(11),age FLOAT(5,2));&quot;</span><span class="p">)</span>
+<span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;INSERT INTO S1(sid,sname,rating,age) VALUES(</span><span class="si">%d</span><span class="s2">,&#39;</span><span class="si">%s</span><span class="s2">&#39;,</span><span class="si">%d</span><span class="s2">,</span><span class="si">%f</span><span class="s2">)&quot;</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="o">%</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span><span class="s1">&#39;dustin&#39;</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mf">45.0</span><span class="p">))</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="o">%</span><span class="p">(</span><span class="mi">31</span><span class="p">,</span><span class="s1">&#39;lubber&#39;</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mf">55.5</span><span class="p">))</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="o">%</span><span class="p">(</span><span class="mi">58</span><span class="p">,</span><span class="s1">&#39;rusty&#39;</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mf">35.0</span><span class="p">))</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;select * from S1&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">())</span>
+
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;CREATE TABLE S2(sid INT(11),sname varchar(15),rating INT(11),age FLOAT(5,2));&quot;</span><span class="p">)</span>
+<span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;INSERT INTO S2(sid,sname,rating,age) VALUES(</span><span class="si">%d</span><span class="s2">,&#39;</span><span class="si">%s</span><span class="s2">&#39;,</span><span class="si">%d</span><span class="s2">,</span><span class="si">%f</span><span class="s2">)&quot;</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="o">%</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span><span class="s1">&#39;yuppy&#39;</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mf">35.0</span><span class="p">))</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="o">%</span><span class="p">(</span><span class="mi">31</span><span class="p">,</span><span class="s1">&#39;lubber&#39;</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mf">55.5</span><span class="p">))</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="o">%</span><span class="p">(</span><span class="mi">44</span><span class="p">,</span><span class="s1">&#39;guppy&#39;</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mf">35.0</span><span class="p">))</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="o">%</span><span class="p">(</span><span class="mi">58</span><span class="p">,</span><span class="s1">&#39;rusty&#39;</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mf">35.0</span><span class="p">))</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;select * from S2&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>((22, &#39;dustin&#39;, 7, 45.0), (31, &#39;lubber&#39;, 8, 55.5), (58, &#39;rusty&#39;, 10, 35.0))
+((28, &#39;yuppy&#39;, 9, 35.0), (31, &#39;lubber&#39;, 8, 55.5), (44, &#39;guppy&#39;, 5, 35.0), (58, &#39;rusty&#39;, 10, 35.0))
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#20851;&#31995;&#20195;&#25968;&#22522;&#30784;">&#20851;&#31995;&#20195;&#25968;&#22522;&#30784;<a class="anchor-link" href="#&#20851;&#31995;&#20195;&#25968;&#22522;&#30784;">&#182;</a></h2><p>只要一个系统支持下述5个操作,即关系完备</p>
 <ul>
-<li>双指针</li>
-<li>while循环只代表一个指针的单调递增</li>
-<li>循环内的副指针能够通过指示进行回溯</li>
-<li>使用 <code>-1</code> 表示没有双指针共同前进,及全无关情况</li>
+<li>Selection($\sigma$): 从关系中选择行子集</li>
+<li>Projection($\pi$): 去除不需要的列,留下需要的列,<strong>投影操作会消除重复元素</strong>,但是真实的数据库产品不会进行这样的操作</li>
+<li>Cross-product($\Join$): 笛卡尔积</li>
+<li>Set-difference($-$): 集合差</li>
+<li>Union($\cup$): 集合并</li>
 </ul>
-<p>这道题目给我的其实应该是一种匹配模式</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="&#25237;&#24433;&#25805;&#20316;&#32467;&#26524;&#20851;&#31995;&#30340;&#27169;&#24335;">&#25237;&#24433;&#25805;&#20316;&#32467;&#26524;&#20851;&#31995;&#30340;&#27169;&#24335;<a class="anchor-link" href="#&#25237;&#24433;&#25805;&#20316;&#32467;&#26524;&#20851;&#31995;&#30340;&#27169;&#24335;">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;select age from S2&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">())</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;select sname,age age from S2&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>((35.0,), (55.5,), (35.0,), (35.0,))
+((&#39;yuppy&#39;, 35.0), (&#39;lubber&#39;, 55.5), (&#39;guppy&#39;, 35.0), (&#39;rusty&#39;, 35.0))
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="&#36873;&#25321;&#25805;&#20316;">&#36873;&#25321;&#25805;&#20316;<a class="anchor-link" href="#&#36873;&#25321;&#25805;&#20316;">&#182;</a></h3><p>选出表中满足条件的行</p>
+<p>$\sigma_{rating&gt;8}S2$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;select * from S2 where rating &gt; 8;&quot;</span><span class="p">)</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[11]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>((28, &#39;yuppy&#39;, 9, 35.0), (58, &#39;rusty&#39;, 10, 35.0))</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>操作的组合:</p>
+<p>选择&amp;投影
+$\pi_{sname.rating}(\sigma_{rating&gt;8}(S2))$</p>
+<p>水手信息 S2</p>
+<table>
+<thead><tr>
+<th>sid</th>
+<th>sname</th>
+<th>rating</th>
+<th>age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>28</td>
+<td>yuppy</td>
+<td>9</td>
+<td>35.0</td>
+</tr>
+<tr>
+<td>31</td>
+<td>lubber</td>
+<td>8</td>
+<td>55.5</td>
+</tr>
+<tr>
+<td>44</td>
+<td>guppy</td>
+<td>5</td>
+<td>35.0</td>
+</tr>
+<tr>
+<td>58</td>
+<td>rusty</td>
+<td>10</td>
+<td>35.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;select sname,rating from S2 where rating &gt; 8;&quot;</span><span class="p">)</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[12]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>((&#39;yuppy&#39;, 9), (&#39;rusty&#39;, 10))</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#38598;&#21512;&#30340;&#24182;&#20132;&#21449;">&#38598;&#21512;&#30340;<code>&#24182;&#20132;&#21449;</code><a class="anchor-link" href="#&#38598;&#21512;&#30340;&#24182;&#20132;&#21449;">&#182;</a></h2><p>要求:<strong>参与集合允许的关系满足并兼容</strong></p>
 <ul>
-<li>使用外挂信息记录跳转</li>
-<li>while循环并非递增</li>
+<li>两个关系有相同个数的属性</li>
+<li>对应属性类型一致</li>
 </ul>
+<p>并 $S1\cup S2$<br>
+交 $S1\cap S2$<br>
+叉 $S1-S2$</p>
+<p>水手信息 S1</p>
+<table>
+<thead><tr>
+<th>sid</th>
+<th>sname</th>
+<th>rating</th>
+<th>age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>22</td>
+<td>dustin</td>
+<td>7</td>
+<td>45.0</td>
+</tr>
+<tr>
+<td>31</td>
+<td>lubber</td>
+<td>8</td>
+<td>55.5</td>
+</tr>
+<tr>
+<td>58</td>
+<td>rusty</td>
+<td>10</td>
+<td>35.0</td>
+</tr>
+</tbody>
+</table>
+<p>水手信息 S2</p>
+<table>
+<thead><tr>
+<th>sid</th>
+<th>sname</th>
+<th>rating</th>
+<th>age</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>28</td>
+<td>yuppy</td>
+<td>9</td>
+<td>35.0</td>
+</tr>
+<tr>
+<td>31</td>
+<td>lubber</td>
+<td>8</td>
+<td>55.5</td>
+</tr>
+<tr>
+<td>44</td>
+<td>guppy</td>
+<td>5</td>
+<td>35.0</td>
+</tr>
+<tr>
+<td>58</td>
+<td>rusty</td>
+<td>10</td>
+<td>35.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;select * from S2 union select * from S1;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;并&quot;</span><span class="p">,</span><span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">())</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;select S2.sid,S2.sname,S2.rating,S2.age from S2 INNER JOIN S1 on S1.sid = S2.sid;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;交&quot;</span><span class="p">,</span><span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">())</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">select * from S2 WHERE NOT EXISTS (select * from S1 where S1.sid = S2.sid );</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span> <span class="c1"># todo - not in 的效率并不好 该用exists</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;叉&quot;</span><span class="p">,</span><span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>并 ((28, &#39;yuppy&#39;, 9, 35.0), (31, &#39;lubber&#39;, 8, 55.5), (44, &#39;guppy&#39;, 5, 35.0), (58, &#39;rusty&#39;, 10, 35.0), (22, &#39;dustin&#39;, 7, 45.0))
+交 ((31, &#39;lubber&#39;, 8, 55.5), (58, &#39;rusty&#39;, 10, 35.0))
+叉 ((28, &#39;yuppy&#39;, 9, 35.0), (44, &#39;guppy&#39;, 5, 35.0))
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="&#31515;&#21345;&#23572;&#20056;&#31215;-&#36830;&#25509;&#25805;&#20316;-Join">&#31515;&#21345;&#23572;&#20056;&#31215;-&#36830;&#25509;&#25805;&#20316; Join<a class="anchor-link" href="#&#31515;&#21345;&#23572;&#20056;&#31215;-&#36830;&#25509;&#25805;&#20316;-Join">&#182;</a></h3>$$
+R\Join_C S = \sigma_C(R\times S)
+$$<ul>
+<li>条件连接</li>
+</ul>
+<p>$S1\Join_{S1.sid &lt; R1.sid}R1$</p>
+<ul>
+<li>等值连接</li>
+</ul>
+<p>$S1\Join_{sid}R1$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;select * from S1 INNER JOIN R1 on  S1.sid &lt; R1.sid;&quot;</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;条件连接&quot;</span><span class="p">,</span><span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">())</span>
+
+<span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;select * from S1 INNER JOIN R1 on  S1.sid = R1.sid;&quot;</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;等值连接&quot;</span><span class="p">,</span><span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>条件连接 ((22, &#39;dustin&#39;, 7, 45.0, 58, 103, datetime.date(1996, 11, 12)), (31, &#39;lubber&#39;, 8, 55.5, 58, 103, datetime.date(1996, 11, 12)))
+等值连接 ((22, &#39;dustin&#39;, 7, 45.0, 22, 101, datetime.date(1996, 10, 10)), (58, &#39;rusty&#39;, 10, 35.0, 58, 103, datetime.date(1996, 11, 12)))
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="&#22806;&#36830;&#25509;">&#22806;&#36830;&#25509;<a class="anchor-link" href="#&#22806;&#36830;&#25509;">&#182;</a></h3><ul>
+<li>left outer join ($*\Join$)</li>
+<li>right outer join ($\Join*$)</li>
+<li>full outer join ($*\Join*$)</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="&#22806;&#24182;">&#22806;&#24182;<a class="anchor-link" href="#&#22806;&#24182;">&#182;</a></h3><ul>
+<li>outer union 不满足并兼容情况下</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="&#38500;&#27861;&#25805;&#20316;">&#38500;&#27861;&#25805;&#20316;<a class="anchor-link" href="#&#38500;&#27861;&#25805;&#20316;">&#182;</a></h3><p>$A/B=\{&lt;x&gt;|\exists &lt;x,y&gt; \in A\ , \forall &lt;y&gt; \in B)\}$</p>
+<blockquote><p>水手订过所有的船</p>
+</blockquote>
+<p>A/B 在关系A中找到与关系B中所有y值都有联系的x值</p>
+<p>=&gt;找到这样的x: 没有一个y值与x是没有联系的</p>
+<p>$A/B =\pi_x (A)- \pi_x((\pi_x(A)\times B)-A)$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># todo </span>
+<span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">select S1.sid,B1.bid from S1 JOIN  B1</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[53]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>((22, 101),
+ (31, 101),
+ (58, 101),
+ (22, 102),
+ (31, 102),
+ (58, 102),
+ (22, 103),
+ (31, 103),
+ (58, 103))</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cursor</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#20851;&#31995;&#28436;&#31639;">&#20851;&#31995;&#28436;&#31639;<a class="anchor-link" href="#&#20851;&#31995;&#28436;&#31639;">&#182;</a></h2><ul>
+<li>TRC 元组关系演算</li>
+<li>DRC 域关系演算</li>
+</ul>
+<p>定义:</p>
+<ul>
+<li>$Query:\{&lt;x_1,x_2,...,x_n&gt; | P(x1,x_2,...,x_n,x_{n+1},...x_{n+m}) \}$</li>
+<li>$x1,x_2,...,x_n,x_{n+1},...x_{n+m}$ 称为域</li>
+<li>找到一组属性值集合能够满足条件的实体</li>
+</ul>
+<p>原子公式:,</p>
+<ul>
+<li>$&lt;x_1,x_2,...,x_n&gt;\in Rname$,$X\ op\ Y$,$X\ op\ constant$,其中$op\in \{\neq,=,&lt;,&gt;,\ge,\le\}$</li>
+</ul>
+<p>公式</p>
+<ul>
+<li>原子公式</li>
+<li>$\neg p,p\wedge q,p\vee q$</li>
+<li>存在量词:$\exists X(p(x))$</li>
+<li>全称量词:$\forall X(p(x))$</li>
+</ul>
+<p>自由变量和绑定变量</p>
+<ul>
+<li>量词描述的是绑定变量$\exists X,\forall X$</li>
+<li>自由变量查询,左边的</li>
+</ul>
+<blockquote><p>例子:查找级别大于7的水手</p>
+<p>关系代数:$\sigma_{rating&gt;7}S1$</p>
+<p>关系演算:$\{&lt;I,N,T,A&gt;|&lt;I,N,T,A&gt;\in Sailors\ \wedge T&gt;7 \}$</p>
+</blockquote>
+<p>安全查询: 结果是一个确定的有限结合</p>
+<p>元组关系演算:</p>
+<ul>
+<li>$\{t[&lt;attr list&gt;]|P(t)\}$</li>
+<li>$\{ t[N] | t\in Sailors \wedge t.T&gt;7 \wedge t.A&lt;50 \}$</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="E-R&#25968;&#25454;&#27169;&#22411;">E-R&#25968;&#25454;&#27169;&#22411;<a class="anchor-link" href="#E-R&#25968;&#25454;&#27169;&#22411;">&#182;</a></h2><ul>
+<li>实体 : 现实世界中的可以区分的真实对,实体由一组属性描述 </li>
+<li>实体集: 一组类似实体的集合<ul>
+<li>一个实体集中所有的实体有相同的属性</li>
+<li>每一个实体有一个key</li>
+<li>每一个属性有一个domin</li>
+<li>允许复合类型,多值属性</li>
+</ul>
+</li>
+<li>联系: 实体之间的关系</li>
+<li>联系集: 所有同类联系的集合<ul>
+<li>组成联系的n个实体的n元关系</li>
+<li>同一个实体集可以参与不同的联系</li>
+</ul>
+</li>
+</ul>
+<p>联系可以表示为:</p>
+<ul>
+<li>1 to 1</li>
+<li>1 to m</li>
+<li>m to 1</li>
+<li>m to m</li>
+</ul>
+<p>ER模型中的高级概念:</p>
+<ul>
+<li>弱实体</li>
+<li>泛化和特殊化</li>
+<li>聚合: 可以把联系也看成实体</li>
+<li>范畴: 不同类型实体的集合</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 
 </div>
 </div>

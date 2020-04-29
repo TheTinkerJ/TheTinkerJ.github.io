@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>dp</title>
+<title>2020年4月27日_lec3</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13077,138 +13077,135 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="KMP&#31639;&#27861;">KMP&#31639;&#27861;<a class="anchor-link" href="#KMP&#31639;&#27861;">&#182;</a></h1><h2 id="KMP&#31639;&#27861;&#26377;&#20004;&#20010;&#20851;&#38190;&#30340;&#27493;&#39588;:">KMP&#31639;&#27861;&#26377;&#20004;&#20010;&#20851;&#38190;&#30340;&#27493;&#39588;:<a class="anchor-link" href="#KMP&#31639;&#27861;&#26377;&#20004;&#20010;&#20851;&#38190;&#30340;&#27493;&#39588;:">&#182;</a></h2><p>(1) Next 数组的生成<br>
-(2) Next 数组的应用</p>
-<h2 id="Next&#25968;&#32452;&#30340;&#21547;&#20041;:">Next&#25968;&#32452;&#30340;&#21547;&#20041;:<a class="anchor-link" href="#Next&#25968;&#32452;&#30340;&#21547;&#20041;:">&#182;</a></h2><p>Next函数的主要目的是为了挖掘匹配子串内部的相关性以及无关性</p>
-<p>如串<code>abcabcd</code>,该串前面的6个字符串是<code>abc</code>重复而成.</p>
-<p>如果文本<code>abcabc*</code>与串<code>abcabcd</code>已经匹配了前6个,
-此时若<code>*</code>是<code>d</code>那么文本可以与字符串匹配,若<code>*</code>不是<code>d</code>,直观来看可以判断是不是<code>a</code>,也就是串的第四个字符,
-能够这样直观进行的原因是我们知道<code>abcabcd</code>前面6个存在重复,且<code>abcabc*</code>已经匹配了6或者3个.</p>
-<p>数组的含义:</p>
+<h1 id="&#39640;&#32500;&#25968;&#25454;&#30340;&#22788;&#29702;">&#39640;&#32500;&#25968;&#25454;&#30340;&#22788;&#29702;<a class="anchor-link" href="#&#39640;&#32500;&#25968;&#25454;&#30340;&#22788;&#29702;">&#182;</a></h1><blockquote><p>Shinging -&gt; Min-Hashing -&gt; Locality-Sensitive-Hashing</p>
+</blockquote>
 <ul>
-<li><code>-1</code>表示没有匹配,可以退出了</li>
-<li><code>i = 0-n</code>表示去<code>i</code>看看,如果<code>i</code>不行可以去<code>next[i]</code>看看</li>
+<li>图片数据</li>
+<li>包含相同文字的页:冗余检测,主题分类</li>
+<li>购买相同产品的顾客</li>
+<li>推荐和搜索</li>
 </ul>
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">getNext</span><span class="p">(</span><span class="n">pattern</span><span class="p">):</span>
-    <span class="n">j</span><span class="p">,</span><span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span>
-    <span class="n">pattern_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span> 
-    <span class="nb">next</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">pattern_len</span>
-    <span class="nb">next</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-    <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">pattern_len</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">pattern</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="n">pattern</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
-            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="nb">next</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span>
-        <span class="k">else</span><span class="p">:</span> 
-            <span class="n">k</span> <span class="o">=</span> <span class="nb">next</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
-    <span class="k">return</span> <span class="nb">next</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[10]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[-1, 0, 0, 0, 1, 2, 3]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Next&#25968;&#32452;&#30340;&#24212;&#29992;">Next&#25968;&#32452;&#30340;&#24212;&#29992;<a class="anchor-link" href="#Next&#25968;&#32452;&#30340;&#24212;&#29992;">&#182;</a></h2><p>虽然是while循环,但是while循环并不是每一次都用来前进的,也可能是装轨</p>
-<p>但是总的前进方向是正确的</p>
+<p>图片数据的大数据处理模式:</p>
+<ul>
+<li>使用神经网络对图像进行特征化嵌入,大概4000个维度</li>
+<li>给定一个query模式,快速找到近似图片</li>
+</ul>
+<blockquote><p>淘宝,拍照找图</p>
+</blockquote>
+<p>高维数据的处理范式:</p>
+<ul>
+<li>给定高维数据点$x_1,x_2$</li>
+<li>给定距离计算方式$d(x_1,x_2)$</li>
+<li>找到所有$d(x_i,x_j)\le s$</li>
+<li>在$O(N)$范围内实现</li>
+</ul>
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">kmp</span><span class="p">(</span><span class="n">string</span><span class="p">,</span><span class="n">pattern</span><span class="p">):</span>
-    <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span>
-    <span class="nb">next</span> <span class="o">=</span> <span class="n">getNext</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
-    <span class="k">while</span>  <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>  <span class="ow">and</span>  <span class="n">j</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span> <span class="p">:</span>
-        <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">string</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">pattern</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
-            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">j</span> <span class="o">=</span> <span class="nb">next</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">i</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
-
-<span class="n">kmp</span><span class="p">(</span><span class="s2">&quot;abcdabceabc&quot;</span><span class="p">,</span><span class="s2">&quot;abce&quot;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[20]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>4</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>两个步骤的相似于不同:</p>
-<ul>
-<li>双指针</li>
-<li>while循环只代表一个指针的单调递增</li>
-<li>循环内的副指针能够通过指示进行回溯</li>
-<li>使用 <code>-1</code> 表示没有双指针共同前进,及全无关情况</li>
+<h2 id="LSH">LSH<a class="anchor-link" href="#LSH">&#182;</a></h2><ul>
+<li>LSH代表一类技术</li>
+<li>通常来说会将元素通过hash丢进不同的buckets</li>
+<li>upside :正确的设计,应该只需要检查一部数据</li>
+<li>downside : 负采样</li>
 </ul>
-<p>这道题目给我的其实应该是一种匹配模式</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#26597;&#25214;&#30456;&#20284;&#30340;&#25991;&#26723;:">&#26597;&#25214;&#30456;&#20284;&#30340;&#25991;&#26723;:<a class="anchor-link" href="#&#26597;&#25214;&#30456;&#20284;&#30340;&#25991;&#26723;:">&#182;</a></h2><p>假设:在 N = 1m 的文章中找到近似的文档</p>
 <ul>
-<li>使用外挂信息记录跳转</li>
-<li>while循环并非递增</li>
+<li>通过情况下我们需要计算每一对之间的相似度</li>
+<li>这是一个<code>N(N-1)/2</code>的计算</li>
 </ul>
+<p>计算文档相似性的关键步骤:</p>
+<ul>
+<li>Shingling 将文档转换为一个二进制的表示</li>
+<li>Min-Hashing 在保证相似性的情况下,将大型数据集转换为一次签名</li>
+<li>Locality-Sensitive Hashing 重点关注可能相似的文章之间的相似性计算</li>
+</ul>
+<p>idea就是将文档hashing到一个bucket中,然后对一个hucket中的文档进行相似度计算</p>
+<h3 id="Shingling">Shingling<a class="anchor-link" href="#Shingling">&#182;</a></h3><p>将一个文档转换成一个集合.集合中包含k个tokens,tokens可以是characters,words或者其他取决于应用</p>
+<p>为了压缩长Shingles,可以将他们压缩到4Bytes,可以使用一组hahs值来代表文档的 k-shingles 集合.</p>
+<p>Shingling的好处:</p>
+<ul>
+<li>通常来说有相同shingle的文档是相似的</li>
+<li>改变一个词只会影响 k-shingles中的 k-1距离内的词</li>
+</ul>
+<blockquote><p>这个算法好像挺适合中文 k = 2<br>
+D = 你好2020!<br>
+S(D) = {你好,好2,20,02,20}<br>
+Hash,h(D) = {1,5,7,9,7}</p>
+</blockquote>
+<h3 id="&#30456;&#20284;&#24230;&#37327;-Jaccard">&#30456;&#20284;&#24230;&#37327; Jaccard<a class="anchor-link" href="#&#30456;&#20284;&#24230;&#37327;-Jaccard">&#182;</a></h3><ul>
+<li>Jaccard相似度量
+$sim(D_1,D_2) = \frac{C_1\cup C_2}{C_1\cap C_2}$</li>
+<li>Jaccard距离
+$d(D_1,D_2) =1 - \frac{C_1\cup C_2}{C_1\cap C_2}$</li>
+</ul>
+<h3 id="&#38598;&#21512;&#36716;&#25442;&#30697;&#38453;">&#38598;&#21512;&#36716;&#25442;&#30697;&#38453;<a class="anchor-link" href="#&#38598;&#21512;&#36716;&#25442;&#30697;&#38453;">&#182;</a></h3><p>$mat = 文档\times elements(shingles)$</p>
+<p>其中$mat[e][s]=1$代表e在文档中,<em>这是不是有点类似词袋模型</em></p>
+<h3 id="Min-Hashing">Min Hashing<a class="anchor-link" href="#Min-Hashing">&#182;</a></h3><p>签名生成(特征压缩)</p>
+<p>key idea: hash 每一行到一个小的 signature h(C) ,此时$sim(C_1,C_2)$近似$sim'(h(C_1),h(C_2))$</p>
+<p>此时目标就是找到这个 hash 函数</p>
+<ul>
+<li>sim(C_1,C_2) 高, $h(C_1)=h(c_2)$</li>
+<li>sim(C_1,C_2) 低, $h(C_1)\neq h(c_2)$</li>
+</ul>
+<p>假设有这样的hash函数:那么相似的文章就会被丢到相同的bucket</p>
+<p>这样的<code>Hash函数</code>依赖于<code>相似度量</code>方式,不一定所有的相似度量方式都有合适的hash函数
+$$
+h_\pi (C) = min_\pi \pi(C)
+$$</p>
+<p>表示每一行第一个1的位置的词的hash码,这样每一个文档的多维表示就被压缩成了1维</p>
+<p>证明略:$Pr[h_\pi (C_1)=h_\pi (C_2)]=sim(C_1,C_2)$</p>
+<p>使用多随机 <code>Shingling-hash</code> 计算相似度</p>
+<p>随机数量越多$Pr[h_\pi (C_1)=h_\pi (C_2)]=sim(C_1,C_2)$越成立</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Locality-Sensitive-Hashing">Locality Sensitive Hashing<a class="anchor-link" href="#Locality-Sensitive-Hashing">&#182;</a></h3><p>一个 bucket 内的相似度计算</p>
+<p>目标: 在Jaccord相似度小于0.8的相似文档</p>
+<p>算法: LSH</p>
+<p>方法: 将相似的列hash到一个bucket,然后在bucket中组件候对</p>
+<p>将 M : hashvalue*documents 中的 hashvalue 分带(b),没条连续带中有 r 行</p>
+<p>对每一个带进行一次bucket划分,相桶的可以计算相似度</p>
+<p>主要也就是 band 相同</p>
+<blockquote><p>相似度 &gt; 0.8 的文档对,有99.965%的概率通过该算法发现到<br>
+相似度 &lt; 0.3 的文档对,有4.74%的概率通过该算法被计算到</p>
+</blockquote>
+<h3 id="LSH&#31639;&#27861;&#30340;&#35843;&#20248;&#31354;&#38388;">LSH&#31639;&#27861;&#30340;&#35843;&#20248;&#31354;&#38388;<a class="anchor-link" href="#LSH&#31639;&#27861;&#30340;&#35843;&#20248;&#31354;&#38388;">&#182;</a></h3><ul>
+<li>M 的数量 Min-hashes</li>
+<li>b 的大小</li>
+<li>没个 b 内的 r 数量, 其中 M = b*r</li>
+<li>阈值 s </li>
+</ul>
+
+<pre><code>s   1-(1-s^r)^b
+0.2  0.006
+0.3  0.047
+0.4  0.186
+0.5  0.470
+0.6  0.802
+0.7  0.975
+0.8  0.9996</code></pre>
 
 </div>
 </div>

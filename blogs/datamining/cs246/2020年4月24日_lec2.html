@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>dp</title>
+<title>2020年4月24日_lec2</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13077,138 +13077,178 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="KMP&#31639;&#27861;">KMP&#31639;&#27861;<a class="anchor-link" href="#KMP&#31639;&#27861;">&#182;</a></h1><h2 id="KMP&#31639;&#27861;&#26377;&#20004;&#20010;&#20851;&#38190;&#30340;&#27493;&#39588;:">KMP&#31639;&#27861;&#26377;&#20004;&#20010;&#20851;&#38190;&#30340;&#27493;&#39588;:<a class="anchor-link" href="#KMP&#31639;&#27861;&#26377;&#20004;&#20010;&#20851;&#38190;&#30340;&#27493;&#39588;:">&#182;</a></h2><p>(1) Next 数组的生成<br>
-(2) Next 数组的应用</p>
-<h2 id="Next&#25968;&#32452;&#30340;&#21547;&#20041;:">Next&#25968;&#32452;&#30340;&#21547;&#20041;:<a class="anchor-link" href="#Next&#25968;&#32452;&#30340;&#21547;&#20041;:">&#182;</a></h2><p>Next函数的主要目的是为了挖掘匹配子串内部的相关性以及无关性</p>
-<p>如串<code>abcabcd</code>,该串前面的6个字符串是<code>abc</code>重复而成.</p>
-<p>如果文本<code>abcabc*</code>与串<code>abcabcd</code>已经匹配了前6个,
-此时若<code>*</code>是<code>d</code>那么文本可以与字符串匹配,若<code>*</code>不是<code>d</code>,直观来看可以判断是不是<code>a</code>,也就是串的第四个字符,
-能够这样直观进行的原因是我们知道<code>abcabcd</code>前面6个存在重复,且<code>abcabc*</code>已经匹配了6或者3个.</p>
-<p>数组的含义:</p>
-<ul>
-<li><code>-1</code>表示没有匹配,可以退出了</li>
-<li><code>i = 0-n</code>表示去<code>i</code>看看,如果<code>i</code>不行可以去<code>next[i]</code>看看</li>
-</ul>
-
+<h1 id="Frequent-Itemset-Mining-&amp;-Association-Rules">Frequent Itemset Mining &amp; Association Rules<a class="anchor-link" href="#Frequent-Itemset-Mining-&amp;-Association-Rules">&#182;</a></h1>
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">getNext</span><span class="p">(</span><span class="n">pattern</span><span class="p">):</span>
-    <span class="n">j</span><span class="p">,</span><span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span>
-    <span class="n">pattern_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span> 
-    <span class="nb">next</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">pattern_len</span>
-    <span class="nb">next</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-    <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">pattern_len</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">pattern</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="n">pattern</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
-            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="nb">next</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span>
-        <span class="k">else</span><span class="p">:</span> 
-            <span class="n">k</span> <span class="o">=</span> <span class="nb">next</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
-    <span class="k">return</span> <span class="nb">next</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[10]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>[-1, 0, 0, 0, 1, 2, 3]</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Next&#25968;&#32452;&#30340;&#24212;&#29992;">Next&#25968;&#32452;&#30340;&#24212;&#29992;<a class="anchor-link" href="#Next&#25968;&#32452;&#30340;&#24212;&#29992;">&#182;</a></h2><p>虽然是while循环,但是while循环并不是每一次都用来前进的,也可能是装轨</p>
-<p>但是总的前进方向是正确的</p>
+<h2 id="Association-Rules-Discovery">Association Rules Discovery<a class="anchor-link" href="#Association-Rules-Discovery">&#182;</a></h2><blockquote><p>关联规则挖掘</p>
+</blockquote>
+<p>物品与购物车模型(item and baskets):</p>
+<ul>
+<li>商品与购物袋</li>
+<li>词与文档</li>
+<li>碱基对与基因</li>
+<li>药物与病人</li>
+</ul>
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">kmp</span><span class="p">(</span><span class="n">string</span><span class="p">,</span><span class="n">pattern</span><span class="p">):</span>
-    <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span>
-    <span class="nb">next</span> <span class="o">=</span> <span class="n">getNext</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
-    <span class="k">while</span>  <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>  <span class="ow">and</span>  <span class="n">j</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span> <span class="p">:</span>
-        <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">string</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">pattern</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
-            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">j</span> <span class="o">=</span> <span class="nb">next</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-    <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">i</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
-
-<span class="n">kmp</span><span class="p">(</span><span class="s2">&quot;abcdabceabc&quot;</span><span class="p">,</span><span class="s2">&quot;abce&quot;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[20]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>4</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>两个步骤的相似于不同:</p>
+<p>First: 定义</p>
 <ul>
-<li>双指针</li>
-<li>while循环只代表一个指针的单调递增</li>
-<li>循环内的副指针能够通过指示进行回溯</li>
-<li>使用 <code>-1</code> 表示没有双指针共同前进,及全无关情况</li>
+<li>Frequent itemsets</li>
+<li><p>Assocaition rules</p>
+<p>confidence support interestingness</p>
+</li>
 </ul>
-<p>这道题目给我的其实应该是一种匹配模式</p>
+<p>Then: Algorithms for finding frequent itemsets</p>
 <ul>
-<li>使用外挂信息记录跳转</li>
-<li>while循环并非递增</li>
+<li>Finding frequent pairs</li>
+<li>A-Priori algorithm</li>
+<li>PCY algo</li>
 </ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#38382;&#39064;&#30340;&#23450;&#20041;">&#38382;&#39064;&#30340;&#23450;&#20041;<a class="anchor-link" href="#&#38382;&#39064;&#30340;&#23450;&#20041;">&#182;</a></h2><ul>
+<li>Itemset : 物品集合</li>
+<li>Frequent Itemset: 频繁集</li>
+</ul>
+<p>目标: 找到经常一起出现的集合</p>
+<p>支持度(support): 数据集对一组频繁集的支持度</p>
+<blockquote><p>{Beer,Bread} = 2 表示全体Baskets中 {Beer,Bread}出现的频数是 2</p>
+</blockquote>
+<p>在给定的 support threshold $s$ (阈值)下,至少出现s次的物品组被称之为<code>频繁集</code></p>
+<p>上述概念的一个样例</p>
+<p><code>Items</code> = {milk, coke, pepsi, beer, juice}<br>
+<code>Support threshold</code> = 3 baskets</p>
+<blockquote><p>B1 = {m,c,b}, B1 = {m,c,b}<br>
+B3 = {m,b},  B4 = {c,j}<br>
+B5 = {m,p,b}, B6 = {m,c,b,j}<br>
+B7 = {c,b,j}, B8 = {b,c}</p>
+</blockquote>
+<p><code>Frequent itemsets</code> = {m},{c}{b},{j},{m,b}</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#20851;&#32852;&#35268;&#21017;">&#20851;&#32852;&#35268;&#21017;<a class="anchor-link" href="#&#20851;&#32852;&#35268;&#21017;">&#182;</a></h2><p>IF-THEN规则
+$$
+\{i_1,i_2,...,i_k\}\to j
+$$
+表示如果一个basket包含全部的$i_1,i_2,...,i_k$,那么他有可能去包含j</p>
+<p>置信度$Confidence$
+$$
+conf(I\to j) = \frac{support(I\cup j)}{support(I)}
+$$
+高置信的关联规则不一定会Interesing</p>
+<p>Interet of an association rule $I\to j$
+$$
+Interest(I\to j) = |conf(I\to j)-Pr[j]| 
+$$
+其中$Pr[j]$表示j出现的概率</p>
+<p>沿用上面的例子,对于关联规则${m,b}\to c$</p>
+<ul>
+<li>supprot = 2</li>
+<li>confidence = 2/4 = 0.5</li>
+<li>Interest = |0.5-5/8| = 1/8</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#20851;&#32852;&#35268;&#21017;&#25366;&#25496;">&#20851;&#32852;&#35268;&#21017;&#25366;&#25496;<a class="anchor-link" href="#&#20851;&#32852;&#35268;&#21017;&#25366;&#25496;">&#182;</a></h2><p>问题的形式化:</p>
+<p>Find all association rules with support $\ge$ s and confidence $\ge$ c</p>
+<p>问题的挑战: 找到<code>frequent itemsets</code></p>
+<p>问题求解:</p>
+<p>Step1: Find all frequent itemset I</p>
+<p>Step2: Rule generation</p>
+<p>对于I的每一个规则子集A,$A\to I|A$:</p>
+<ul>
+<li>只要I是FI(frequent itemset),那么A也是frequent的</li>
+<li>只要一轮就可以计算规则的confidence,$confidence(A,B-\to C,D)=support(A,B,C,D)/support(A,B)$</li>
+<li>如果$A,B,C\to D$小于confidence 那么 $A,B\to C,D$也小于,原因分子一样,分母变大 </li>
+</ul>
+<p>关联规则挖掘的步骤:</p>
+<ul>
+<li>计算全部的frequent itemset(根据s)</li>
+<li>生成规则(根据c)</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#22914;&#20309;&#21457;&#29616;-Frequent-itemsets">&#22914;&#20309;&#21457;&#29616; Frequent itemsets<a class="anchor-link" href="#&#22914;&#20309;&#21457;&#29616;-Frequent-itemsets">&#182;</a></h2><p>存储方式: 磁盘文件<br>
+关键资源: 内存</p>
+<p>最困难的问题: 发现 frequent pairs of items$\{i_1,i_2\}$</p>
+<p>方案:</p>
+<ul>
+<li>生成全部的 itemsets</li>
+<li>最后只会计数最终frequeent的itemsets, how?</li>
+</ul>
+<p>朴素的方法:</p>
+<ul>
+<li>使用双层嵌套生成items对 n(n-1)/2</li>
+<li>如果有100K的items,大约需要20G的内存</li>
+</ul>
+<p>如何实现pair的count计算:</p>
+<ul>
+<li>使用矩阵,三角矩阵,4 bytes per pair 计算全部</li>
+<li>使用一张数据表 $[i,j,c]$ 12 bytes pre pair 计算出现</li>
+</ul>
+<h2 id="&#25968;&#25454;&#36807;&#22810;&#26080;&#27861;&#36733;&#20837;&#20869;&#23384;&#24590;&#20040;&#21150;?">&#25968;&#25454;&#36807;&#22810;&#26080;&#27861;&#36733;&#20837;&#20869;&#23384;&#24590;&#20040;&#21150;?<a class="anchor-link" href="#&#25968;&#25454;&#36807;&#22810;&#26080;&#27861;&#36733;&#20837;&#20869;&#23384;&#24590;&#20040;&#21150;?">&#182;</a></h2><blockquote><p>A-Priori Algorithm,基于优先级的优化算法</p>
+</blockquote>
+<p>一个两次遍历的算法<code>A-Priori</code>降低了内存需求,相比与原始的设计</p>
+<p>关键想法: 单调性,如果 I 出现了 s 次, 那么作为J的子集,J 至少出现了 s 次</p>
+<p>pass1: 读取每一个baskets并且在内存中计算每一个独立item出现的次数,挖掘次数大于s的items</p>
+<p>pass2: 第二次遍历只关注 第一次发现的 items 的组合的次数</p>
+<h2 id="Triple&#26159;&#22914;&#20309;&#33719;&#21462;&#30340;?">Triple&#26159;&#22914;&#20309;&#33719;&#21462;&#30340;?<a class="anchor-link" href="#Triple&#26159;&#22914;&#20309;&#33719;&#21462;&#30340;?">&#182;</a></h2><p>由二元组join形成,但是不一定有效$\{b,c\}+\{c,j\}\to \{b,c,j\}$不一定有效,因为$\{b,j\}$未知</p>
+<blockquote><p>A-Priori是可以计算全部 Frequent Itemsets的</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="PCY&#31639;&#27861;">PCY&#31639;&#27861;<a class="anchor-link" href="#PCY&#31639;&#27861;">&#182;</a></h2><blockquote><p>对A-Priori提升</p>
+</blockquote>
+<p>pass1 of PCY:</p>
+<ul>
+<li>除了计数,维护一个hash table包含很多buckets适合内存,桶机制</li>
+<li>将pair hash 到一个桶中,在内存桶中加一</li>
+<li>如果桶的 total count 小于s, 那么桶中所有的pair都不符合要求</li>
+</ul>
+<p>Passs2 计算仅仅能够 hash 到 frequent buckets 中的pairs</p>
+<p>所以PCY算法更多的是进行一次计算上的优化,等于添加了一个锁文件</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#23567;&#20110;&#20004;&#27425;&#36845;&#20195;&#30340;&#26041;&#27861;">&#23567;&#20110;&#20004;&#27425;&#36845;&#20195;&#30340;&#26041;&#27861;<a class="anchor-link" href="#&#23567;&#20110;&#20004;&#27425;&#36845;&#20195;&#30340;&#26041;&#27861;">&#182;</a></h2><p>使用<code>采样</code>来模拟统计,降低s以提高发现frequent的概率</p>
 
 </div>
 </div>
