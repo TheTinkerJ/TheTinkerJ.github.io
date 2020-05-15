@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>index</title>
+<title>2020年4月20日_Graphviz绘图模块</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13077,607 +13077,10 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="https://raw.githubusercontent.com/TheTinkerJ/TheTinkerJ.github.io/master/_material/_index/head.png" alt="网站首页图片"></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="&#29483;&#21733;'s-&#36187;&#21338;&#31354;&#38388;">&#29483;&#21733;'s &#36187;&#21338;&#31354;&#38388;<a class="anchor-link" href="#&#29483;&#21733;'s-&#36187;&#21338;&#31354;&#38388;">&#182;</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">site_info</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;url&#39;</span><span class="p">:</span><span class="s1">&#39;https://thetinkerj.github.io/&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;material_url&#39;</span><span class="p">:</span><span class="s1">&#39;https://raw.githubusercontent.com/TheTinkerJ/TheTinkerJ.github.io/master/&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;repo&#39;</span><span class="p">:</span><span class="s1">&#39;TheTinkerJ.github.io&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;author&#39;</span><span class="p">:</span><span class="s1">&#39;猫哥&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;email&#39;</span><span class="p">:</span><span class="s1">&#39;thetinkerj@outlook.com&#39;</span><span class="p">,</span>
-<span class="p">}</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">welcome</span><span class="p">():</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;欢迎来到-猫哥-的Site-ฅ&#39;ω&#39;ฅ!&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;flag : goodgoodstudy daydayup!!!&quot;</span><span class="p">)</span>
-<span class="n">welcome</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>欢迎来到-猫哥-的Site-ฅ&#39;ω&#39;ฅ!
-flag : goodgoodstudy daydayup!!!
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="&#30446;&#24405;-Contents">&#30446;&#24405; Contents<a class="anchor-link" href="#&#30446;&#24405;-Contents">&#182;</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.core.display</span> <span class="k">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
-<span class="kn">import</span> <span class="nn">os</span>
-
-<span class="n">indent_html</span><span class="p">,</span><span class="n">indent_offset</span><span class="o">=</span> <span class="s2">&quot;&amp;emsp;&quot;</span><span class="p">,</span><span class="mi">3</span>        
-<span class="n">contents</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="s2">&quot;_posts&quot;</span><span class="p">]</span>
-<span class="n">root_path</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">show_dir</span><span class="p">(</span><span class="n">dir_name</span><span class="p">):</span>
-    <span class="n">left</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span><span class="o">-</span> <span class="n">indent_offset</span>
-    <span class="n">dir_indent</span> <span class="o">=</span> <span class="p">[</span><span class="n">indent_html</span><span class="p">]</span><span class="o">*</span><span class="n">left</span>
-    <span class="n">dir_indent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dir_name</span><span class="p">)</span>
-    <span class="n">dir_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_indent</span><span class="p">)</span> <span class="o">+</span><span class="s2">&quot;/&quot;</span>
-    <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">dir_str</span><span class="p">))</span>
-    
-<span class="k">def</span> <span class="nf">show_note</span><span class="p">(</span><span class="n">page_name</span><span class="p">):</span>
-    <span class="n">left</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span> <span class="o">-</span><span class="n">indent_offset</span>
-    <span class="n">page_indent</span> <span class="o">=</span> <span class="p">[</span><span class="n">indent_html</span><span class="p">]</span><span class="o">*</span><span class="n">left</span>
-    <span class="n">page_indent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">page_name</span><span class="p">)</span>
-    <span class="n">page_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">page_indent</span><span class="p">)</span>
-    <span class="n">page_url_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;blogs&quot;</span><span class="p">]</span>
-    <span class="n">page_url_list</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">contents</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-    <span class="n">page_url_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">page_name</span><span class="o">+</span><span class="s2">&quot;.html&quot;</span><span class="p">)</span>
-    <span class="n">page_url</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">page_url_list</span><span class="p">)</span>
-    <span class="n">page_url_str</span> <span class="o">=</span> <span class="s1">&#39;&lt;a href=&quot;</span><span class="si">%s</span><span class="s1">&quot; style=&quot;text-decoration:none&quot;&gt;</span><span class="si">%s</span><span class="s1">&lt;/a&gt;&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">page_url</span><span class="p">,</span><span class="n">page_str</span><span class="p">)</span>
-    <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">page_url_str</span><span class="p">))</span>
-
-<span class="k">def</span> <span class="nf">search_Dir</span><span class="p">(</span><span class="n">dir_path</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">dir_path</span><span class="p">):</span>
-        <span class="n">contents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-        <span class="n">cur_path</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">cur_path</span><span class="p">)</span> <span class="ow">and</span> <span class="n">cur_path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.ipynb&#39;</span><span class="p">):</span>
-            <span class="n">filename</span><span class="p">,</span><span class="n">suffix</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-            <span class="n">show_note</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">cur_path</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">cur_path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.ipynb_checkpoints&quot;</span><span class="p">):</span>
-            <span class="n">show_dir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-            <span class="n">search_Dir</span><span class="p">(</span><span class="n">cur_path</span><span class="p">)</span>
-        <span class="n">contents</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-    
-<span class="n">search_Dir</span><span class="p">(</span><span class="n">root_path</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-AboutThisBlog/
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<a href="blogs/AboutThisBlog/2020年4月20日_Graphviz绘图模块.html" style="text-decoration:none">&emsp;2020年4月20日_Graphviz绘图模块</a>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-Java虚拟机/
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<a href="blogs/Java虚拟机/2020年4月18日_JVM的内存模型.html" style="text-decoration:none">&emsp;2020年4月18日_JVM的内存模型</a>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-MYSQL知识点/
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<a href="blogs/MYSQL知识点/2020年4月23日_01-我的本地sql环境.html" style="text-decoration:none">&emsp;2020年4月23日_01-我的本地sql环境</a>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<a href="blogs/MYSQL知识点/2020年4月24日_02-数据模型.html" style="text-decoration:none">&emsp;2020年4月24日_02-数据模型</a>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<a href="blogs/MYSQL知识点/2020年4月25日_03-sql语言.html" style="text-decoration:none">&emsp;2020年4月25日_03-sql语言</a>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<a href="blogs/MYSQL知识点/2020年4月25日_负1-数据库中使用到的各种树.html" style="text-decoration:none">&emsp;2020年4月25日_负1-数据库中使用到的各种树</a>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<a href="blogs/MYSQL知识点/2020年4月25日_负2-一些sql题.html" style="text-decoration:none">&emsp;2020年4月25日_负2-一些sql题</a>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<a href="blogs/MYSQL知识点/2020年4月30日_04-DBMS的实现.html" style="text-decoration:none">&emsp;2020年4月30日_04-DBMS的实现</a>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<a href="blogs/MYSQL知识点/2020年5月1日_05-安全与完整性约束.html" style="text-decoration:none">&emsp;2020年5月1日_05-安全与完整性约束</a>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<a href="blogs/MYSQL知识点/2020年5月2日_06-数据库设计.html" style="text-decoration:none">&emsp;2020年5月2日_06-数据库设计</a>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-基础算法/
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<a href="blogs/基础算法/2020年4月18日_差分数组.html" style="text-decoration:none">&emsp;2020年4月18日_差分数组</a>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<a href="blogs/基础算法/2020年4月24日_LRU的两种实现方式.html" style="text-decoration:none">&emsp;2020年4月24日_LRU的两种实现方式</a>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<a href="blogs/基础算法/2020年4月24日_一些dp问题.html" style="text-decoration:none">&emsp;2020年4月24日_一些dp问题</a>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<a href="blogs/基础算法/2020年4月24日_双指针数组冒泡.html" style="text-decoration:none">&emsp;2020年4月24日_双指针数组冒泡</a>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<a href="blogs/基础算法/2020年4月25日_查找算法.html" style="text-decoration:none">&emsp;2020年4月25日_查找算法</a>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<a href="blogs/基础算法/2020年4月7日_数独问题的研究.html" style="text-decoration:none">&emsp;2020年4月7日_数独问题的研究</a>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<a href="blogs/基础算法/2020年5月5日_daily刷题记录.html" style="text-decoration:none">&emsp;2020年5月5日_daily刷题记录</a>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-&emsp;tree/
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-数据挖掘/
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-&emsp;cs246/
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<a href="blogs/数据挖掘/cs246/2020年4月23日_lec1.html" style="text-decoration:none">&emsp;&emsp;2020年4月23日_lec1</a>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<a href="blogs/数据挖掘/cs246/2020年4月24日_lec2.html" style="text-decoration:none">&emsp;&emsp;2020年4月24日_lec2</a>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<a href="blogs/数据挖掘/cs246/2020年4月27日_lec3.html" style="text-decoration:none">&emsp;&emsp;2020年4月27日_lec3</a>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<a href="blogs/数据挖掘/cs246/lec4.html" style="text-decoration:none">&emsp;&emsp;lec4</a>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-机器学习/
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-程序语言/
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-&emsp;java/
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-&emsp;python/
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-&emsp;scala/
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-观看阅读/
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<a href="blogs/观看阅读/2020年4月14日_大数据之路-概述.html" style="text-decoration:none">&emsp;2020年4月14日_大数据之路-概述</a>
-</div>
-
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-
-<div class="output_html rendered_html output_subarea ">
-<a href="blogs/观看阅读/2020年4月17日_大数据之路-数据技术.html" style="text-decoration:none">&emsp;2020年4月17日_大数据之路-数据技术</a>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
-<span class="n">localtime</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">asctime</span><span class="p">(</span> <span class="n">time</span><span class="o">.</span><span class="n">localtime</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span> <span class="p">)</span>
-<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;更新时间 :&quot;</span><span class="p">,</span> <span class="n">localtime</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>更新时间 : Fri May 15 15:49:28 2020
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="&#35797;&#22270;&#24341;&#20837;&#19968;&#20123;&#26032;&#30340;&#20869;&#23481;:">&#35797;&#22270;&#24341;&#20837;&#19968;&#20123;&#26032;&#30340;&#20869;&#23481;:<a class="anchor-link" href="#&#35797;&#22270;&#24341;&#20837;&#19968;&#20123;&#26032;&#30340;&#20869;&#23481;:">&#182;</a></h2><ul>
-<li>graphviz</li>
+<h1 id="Graphviz-&#32472;&#22270;&#24211;">Graphviz &#32472;&#22270;&#24211;<a class="anchor-link" href="#Graphviz-&#32472;&#22270;&#24211;">&#182;</a></h1><ul>
+<li>创建一个图对象</li>
+<li>通过组装边或者节点类丰富这个图</li>
+<li>获得渲染结果,支持嵌入jupyter notebook</li>
 </ul>
 
 </div>
@@ -13685,14 +13088,19 @@ MYSQL知识点/
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">graphviz</span> <span class="k">import</span> <span class="n">Digraph</span>
-
-<span class="n">g</span> <span class="o">=</span> <span class="n">Digraph</span><span class="p">(</span><span class="s1">&#39;G&#39;</span><span class="p">)</span>
-<span class="n">g</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span><span class="s1">&#39;Mr.Jing!&#39;</span><span class="p">)</span>
-<span class="n">g</span>
+<span class="n">dot</span> <span class="o">=</span> <span class="n">Digraph</span><span class="p">(</span><span class="n">comment</span><span class="o">=</span><span class="s1">&#39;The Round Table&#39;</span><span class="p">)</span>
+<span class="n">dot</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;King Arthur&#39;</span><span class="p">)</span>
+<span class="n">dot</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;Sir Bedevere the Wise&#39;</span><span class="p">)</span>
+<span class="n">dot</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="s1">&#39;Sir Lancelot the Brave&#39;</span><span class="p">)</span>
+<span class="n">dot</span><span class="o">.</span><span class="n">edges</span><span class="p">([</span><span class="s1">&#39;AB&#39;</span><span class="p">,</span> <span class="s1">&#39;AL&#39;</span><span class="p">])</span>
+<span class="n">dot</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;L&#39;</span><span class="p">,</span> <span class="n">constraint</span><span class="o">=</span><span class="s1">&#39;false&#39;</span><span class="p">)</span>
+<span class="c1"># print(dot.source) </span>
+<span class="c1"># dot.render()</span>
+<span class="n">dot</span>
 </pre></div>
 
     </div>
@@ -13705,7 +13113,7 @@ MYSQL知识点/
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[5]:</div>
+    <div class="prompt output_prompt">Out[9]:</div>
 
 
 
@@ -13715,26 +13123,41 @@ MYSQL知识点/
  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <!-- Generated by graphviz version 2.38.0 (20140413.2041)
  -->
-<!-- Title: G Pages: 1 -->
-<svg width="90pt" height="116pt"
- viewBox="0.00 0.00 89.89 116.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<!-- Title: %3 Pages: 1 -->
+<svg width="390pt" height="116pt"
+ viewBox="0.00 0.00 389.98 116.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 112)">
-<title>G</title>
-<polygon fill="white" stroke="none" points="-4,4 -4,-112 85.8927,-112 85.8927,4 -4,4"/>
-<!-- hello -->
-<g id="node1" class="node"><title>hello</title>
-<ellipse fill="none" stroke="black" cx="40.9464" cy="-90" rx="27.8951" ry="18"/>
-<text text-anchor="middle" x="40.9464" y="-86.3" font-family="Times New Roman,serif" font-size="14.00">hello</text>
+<title>%3</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-112 385.984,-112 385.984,4 -4,4"/>
+<!-- A -->
+<g id="node1" class="node"><title>A</title>
+<ellipse fill="none" stroke="black" cx="190.992" cy="-90" rx="53.8905" ry="18"/>
+<text text-anchor="middle" x="190.992" y="-86.3" font-family="Times New Roman,serif" font-size="14.00">King Arthur</text>
 </g>
-<!-- Mr.Jing! -->
-<g id="node2" class="node"><title>Mr.Jing!</title>
-<ellipse fill="none" stroke="black" cx="40.9464" cy="-18" rx="40.8928" ry="18"/>
-<text text-anchor="middle" x="40.9464" y="-14.3" font-family="Times New Roman,serif" font-size="14.00">Mr.Jing!</text>
+<!-- B -->
+<g id="node2" class="node"><title>B</title>
+<ellipse fill="none" stroke="black" cx="90.9919" cy="-18" rx="90.9839" ry="18"/>
+<text text-anchor="middle" x="90.9919" y="-14.3" font-family="Times New Roman,serif" font-size="14.00">Sir Bedevere the Wise</text>
 </g>
-<!-- hello&#45;&gt;Mr.Jing! -->
-<g id="edge1" class="edge"><title>hello&#45;&gt;Mr.Jing!</title>
-<path fill="none" stroke="black" d="M40.9464,-71.6966C40.9464,-63.9827 40.9464,-54.7125 40.9464,-46.1124"/>
-<polygon fill="black" stroke="black" points="44.4465,-46.1043 40.9464,-36.1043 37.4465,-46.1044 44.4465,-46.1043"/>
+<!-- A&#45;&gt;B -->
+<g id="edge1" class="edge"><title>A&#45;&gt;B</title>
+<path fill="none" stroke="black" d="M168.799,-73.4647C155.331,-64.0371 137.916,-51.8466 122.977,-41.3897"/>
+<polygon fill="black" stroke="black" points="124.716,-38.3345 114.516,-35.4672 120.702,-44.0692 124.716,-38.3345"/>
+</g>
+<!-- L -->
+<g id="node3" class="node"><title>L</title>
+<ellipse fill="none" stroke="black" cx="290.992" cy="-18" rx="90.9839" ry="18"/>
+<text text-anchor="middle" x="290.992" y="-14.3" font-family="Times New Roman,serif" font-size="14.00">Sir Lancelot the Brave</text>
+</g>
+<!-- A&#45;&gt;L -->
+<g id="edge2" class="edge"><title>A&#45;&gt;L</title>
+<path fill="none" stroke="black" d="M213.185,-73.4647C226.653,-64.0371 244.068,-51.8466 259.007,-41.3897"/>
+<polygon fill="black" stroke="black" points="261.282,-44.0692 267.467,-35.4672 257.268,-38.3345 261.282,-44.0692"/>
+</g>
+<!-- B&#45;&gt;L -->
+<g id="edge3" class="edge"><title>B&#45;&gt;L</title>
+<path fill="none" stroke="black" d="M182.008,-18C184.615,-18 187.223,-18 189.83,-18"/>
+<polygon fill="black" stroke="black" points="189.888,-21.5001 199.888,-18 189.888,-14.5001 189.888,-21.5001"/>
 </g>
 </g>
 </svg>
@@ -13746,6 +13169,193 @@ MYSQL知识点/
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#32472;&#22270;&#26684;&#24335;">&#32472;&#22270;&#26684;&#24335;<a class="anchor-link" href="#&#32472;&#22270;&#26684;&#24335;">&#182;</a></h2><ul>
+<li>graph_attr</li>
+<li>node_attr</li>
+<li>edge_attr</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">graphviz</span> <span class="k">import</span> <span class="n">Graph</span>
+<span class="n">ni</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s1">&#39;ni&#39;</span><span class="p">)</span>
+<span class="n">ni</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;node&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s1">&#39;rarrow&#39;</span><span class="p">)</span>
+<span class="n">ni</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;Ni!&#39;</span><span class="p">)</span> <span class="c1"># id label 的格式</span>
+<span class="n">ni</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;Ni!&#39;</span><span class="p">)</span>
+<span class="n">ni</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="s1">&#39;Ni!&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s1">&#39;egg&#39;</span><span class="p">)</span>
+<span class="n">ni</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="s1">&#39;node&#39;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s1">&#39;star&#39;</span><span class="p">)</span>
+<span class="n">ni</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s1">&#39;4&#39;</span><span class="p">,</span> <span class="s1">&#39;Ni!&#39;</span><span class="p">)</span>
+<span class="n">ni</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s1">&#39;5&#39;</span><span class="p">,</span> <span class="s1">&#39;Ni!&#39;</span><span class="p">)</span>
+<span class="n">ni</span><span class="o">.</span><span class="n">attr</span><span class="p">(</span><span class="n">rankdir</span><span class="o">=</span><span class="s1">&#39;LR&#39;</span><span class="p">)</span>
+<span class="n">ni</span><span class="o">.</span><span class="n">edges</span><span class="p">([</span><span class="s1">&#39;12&#39;</span><span class="p">,</span> <span class="s1">&#39;23&#39;</span><span class="p">,</span> <span class="s1">&#39;34&#39;</span><span class="p">,</span> <span class="s1">&#39;45&#39;</span><span class="p">])</span>
+<span class="n">ni</span>
+<span class="c1"># 嵌入html标签</span>
+<span class="c1"># 能够直接引用图片吗</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s1">&#39;html_table&#39;</span><span class="p">)</span>
+<span class="n">h</span><span class="o">.</span><span class="n">node</span><span class="p">(</span><span class="s1">&#39;tab&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;&lt;&lt;TABLE&gt;</span>
+<span class="s1">&lt;TR&gt;</span>
+<span class="s1">&lt;TD&gt;left&lt;/TD&gt;</span>
+<span class="s1">&lt;TD&gt;right&lt;/TD&gt;</span>
+<span class="s1">&lt;/TR&gt;</span>
+<span class="s1">&lt;/TABLE&gt;&gt;&#39;&#39;&#39;</span><span class="p">)</span>
+<span class="n">h</span>
+
+<span class="c1"># from graphviz import nohtml # 使用nohtml来屏蔽html关键字</span>
+<span class="c1"># from graphviz import escape # 使用escape来逃逸ascii字符</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[15]:</div>
+
+
+
+<div class="output_svg output_subarea output_execute_result">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.38.0 (20140413.2041)
+ -->
+<!-- Title: html_table Pages: 1 -->
+<svg width="120pt" height="57pt"
+ viewBox="0.00 0.00 119.72 57.50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 53.4975)">
+<title>html_table</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-53.4975 115.723,-53.4975 115.723,4 -4,4"/>
+<!-- tab -->
+<g id="node1" class="node"><title>tab</title>
+<ellipse fill="none" stroke="black" cx="55.8614" cy="-24.7487" rx="55.7232" ry="25"/>
+<polygon fill="none" stroke="black" points="27.8614,-13.7487 27.8614,-34.7487 51.8614,-34.7487 51.8614,-13.7487 27.8614,-13.7487"/>
+<text text-anchor="start" x="30.8614" y="-20.5487" font-family="Times New Roman,serif" font-size="14.00">left</text>
+<polygon fill="none" stroke="black" points="53.8614,-13.7487 53.8614,-34.7487 84.8614,-34.7487 84.8614,-13.7487 53.8614,-13.7487"/>
+<text text-anchor="start" x="56.8614" y="-20.5487" font-family="Times New Roman,serif" font-size="14.00">right</text>
+<polygon fill="none" stroke="black" points="24.3614,-11.2487 24.3614,-38.2487 87.3614,-38.2487 87.3614,-11.2487 24.3614,-11.2487"/>
+</g>
+</g>
+</svg>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#23376;&#22270;&#21644;&#31751;&#38598;">&#23376;&#22270;&#21644;&#31751;&#38598;<a class="anchor-link" href="#&#23376;&#22270;&#21644;&#31751;&#38598;">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;parent&#39;</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s1">&#39;spam&#39;</span><span class="p">,</span> <span class="s1">&#39;eggs&#39;</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;child&#39;</span><span class="p">,</span> <span class="n">node_attr</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;shape&#39;</span><span class="p">:</span> <span class="s1">&#39;box&#39;</span><span class="p">})</span>
+<span class="n">c</span><span class="o">.</span><span class="n">edge</span><span class="p">(</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">subgraph</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="n">p</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[17]:</div>
+
+
+
+<div class="output_svg output_subarea output_execute_result">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.38.0 (20140413.2041)
+ -->
+<!-- Title: parent Pages: 1 -->
+<svg width="142pt" height="116pt"
+ viewBox="0.00 0.00 141.55 116.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 112)">
+<title>parent</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-112 137.547,-112 137.547,4 -4,4"/>
+<!-- spam -->
+<g id="node1" class="node"><title>spam</title>
+<ellipse fill="none" stroke="black" cx="30.5473" cy="-90" rx="30.5947" ry="18"/>
+<text text-anchor="middle" x="30.5473" y="-86.3" font-family="Times New Roman,serif" font-size="14.00">spam</text>
+</g>
+<!-- eggs -->
+<g id="node2" class="node"><title>eggs</title>
+<ellipse fill="none" stroke="black" cx="30.5473" cy="-18" rx="27.0966" ry="18"/>
+<text text-anchor="middle" x="30.5473" y="-14.3" font-family="Times New Roman,serif" font-size="14.00">eggs</text>
+</g>
+<!-- spam&#45;&#45;eggs -->
+<g id="edge1" class="edge"><title>spam&#45;&#45;eggs</title>
+<path fill="none" stroke="black" d="M30.5473,-71.6966C30.5473,-60.8463 30.5473,-46.9167 30.5473,-36.1043"/>
+</g>
+<!-- foo -->
+<g id="node3" class="node"><title>foo</title>
+<polygon fill="none" stroke="black" points="133.547,-108 79.5473,-108 79.5473,-72 133.547,-72 133.547,-108"/>
+<text text-anchor="middle" x="106.547" y="-86.3" font-family="Times New Roman,serif" font-size="14.00">foo</text>
+</g>
+<!-- bar -->
+<g id="node4" class="node"><title>bar</title>
+<polygon fill="none" stroke="black" points="133.547,-36 79.5473,-36 79.5473,-0 133.547,-0 133.547,-36"/>
+<text text-anchor="middle" x="106.547" y="-14.3" font-family="Times New Roman,serif" font-size="14.00">bar</text>
+</g>
+<!-- foo&#45;&#45;bar -->
+<g id="edge2" class="edge"><title>foo&#45;&#45;bar</title>
+<path fill="none" stroke="black" d="M106.547,-71.6966C106.547,-60.8463 106.547,-46.9167 106.547,-36.1043"/>
+</g>
+</g>
+</svg>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="&#28304;&#25991;&#20214;&#30340;&#20351;&#29992;">&#28304;&#25991;&#20214;&#30340;&#20351;&#29992;<a class="anchor-link" href="#&#28304;&#25991;&#20214;&#30340;&#20351;&#29992;">&#182;</a></h2><div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">graphviz</span> <span class="kn">import</span> <span class="n">render</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">render</span><span class="p">(</span><span class="s1">&#39;dot&#39;</span><span class="p">,</span> <span class="s1">&#39;png&#39;</span><span class="p">,</span> <span class="s1">&#39;test-output/holy-grenade.gv&#39;</span><span class="p">)</span>  
+<span class="s1">&#39;test-output/holy-grenade.gv.png&#39;</span>
+</pre></div>
+
+</div>
+</div>
 </div>
     </div>
   </div>
