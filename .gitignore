@@ -2,3 +2,10 @@
 .ipynb_checkpoints/index-checkpoint.ipynb
 .ipynb_checkpoints/jpnblog-checkpoint.py
 .vscode/settings.json
+_draft/算法挑战/test/test/ad.csv
+_draft/算法挑战/test/test/click_log.csv
+_draft/算法挑战/test/test/README
+_draft/算法挑战/train_preliminary/train_preliminary/ad.csv
+_draft/算法挑战/train_preliminary/train_preliminary/click_log.csv
+_draft/算法挑战/train_preliminary/train_preliminary/README
+_draft/算法挑战/train_preliminary/train_preliminary/user.csv
